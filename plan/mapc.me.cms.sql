@@ -3,14 +3,26 @@
 -- http://www.phpmyadmin.net
 --
 -- 호스트: 127.0.0.1
--- 처리한 시간: 13-12-16 15:56
+-- 처리한 시간: 14-01-12 15:40
 -- 서버 버전: 5.6.11
 -- PHP 버전: 5.5.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+
+--
+-- 데이터베이스: `dbname`
+--
+CREATE DATABASE IF NOT EXISTS `dbname` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `dbname`;
+
+-- --------------------------------------------------------
 
 --
 -- 테이블 구조 `mapc_post`
@@ -23,14 +35,16 @@ CREATE TABLE IF NOT EXISTS `mapc_post` (
   `post_title` varchar(255) DEFAULT NULL,
   `post_content` text,
   `post_origin_type` varchar(45) DEFAULT NULL,
+  `post_origin_server` varchar(127) DEFAULT NULL,
   `post_origin_url` varchar(255) DEFAULT NULL COMMENT '원본의 위치\ndirectory/filename.ext\nhttp://url/directory/filename.ext',
   `post_write_date` datetime DEFAULT NULL,
   `post_edit_date_latest` datetime DEFAULT NULL,
   `post_status` char(3) DEFAULT NULL COMMENT '예. cate-status, key-normal, value-일반',
+  `post_user_uid` varchar(25) DEFAULT NULL,
   `post_etc` char(3) DEFAULT NULL,
   PRIMARY KEY (`post_seq`),
   UNIQUE KEY `UID_LANG` (`post_uid`,`post_lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=99 ;
 
 -- --------------------------------------------------------
 
@@ -46,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `mapc_postmeta` (
   `postmeta_value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`postmeta_seq`),
   KEY `post_uid_idx` (`postmeta_post_uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=958 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=656 ;
 
 -- --------------------------------------------------------
 
