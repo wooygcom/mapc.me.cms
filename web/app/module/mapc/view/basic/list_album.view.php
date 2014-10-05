@@ -10,16 +10,8 @@ if(is_array($post_list)) {
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
 	  <a href="<?= $URL['mapc']['view']; ?>&mapc_uid=<?= $var['post_uid']; ?>&mapc_lang=<?= $var['post_lang']; ?>" class="thumbnail">
-        <img src="<?= $file_url; ?>" alt="...">
+        <img src="<?= $file_url; ?>" alt="<?= $var['post_title']; ?>">
 	  </a>
-      <div class="caption">
-        <p>
-            <a href="<?= $URL['mapc']['view']; ?>&mapc_uid=<?= $var['post_uid']; ?>&mapc_lang=<?= $var['post_lang']; ?>"><?= $var['post_title']; ?></a>
-            <br />
-            <?= $var['post_write_date']; ?>
-        </p>
-        <p><?= nl2br(mb_strimwidth(htmlspecialchars($var['post_content']), 0, 127, '...', $CONFIG['encode'])); ?></p>
-      </div>
     </div>
   </div>
 

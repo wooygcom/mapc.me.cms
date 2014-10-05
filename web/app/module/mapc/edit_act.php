@@ -33,7 +33,7 @@ require(INIT_PATH . 'init.head.php');
             // DB에서 기존 정보 가져오기
             $query = "
                 select post_lang, post_origin_type, post_origin_url
-                  from mapc_post
+                  from " . $CONFIG_DB['prefix'] . "mapc_post
                  where post_uid = :post_uid
                    and post_lang = :post_lang
                   ";
@@ -58,24 +58,6 @@ require(INIT_PATH . 'init.head.php');
 
         $arg['meta']     = (!empty($_POST['meta']))  ? $_POST['meta'] : array();
 
-       // 새로등록 할 경우
-       if($is_new_post) {
-
-            // 처음 글을 쓰는 경우 그리고 dc_date에 아무값도 안들어왔을 경우에는 현재시간이 dc_date값으로...
-            $arg['date']     = $arg['meta']['dc_date'][0] = (! empty($arg['meta']['dc_date'][0])) ? $arg['meta']['dc_date'][0] : date('Y-m-d H:i:s');
-            $arg['date_utc'] = gmdate('Y-m-d H:i:s');
-            $arg['meta']['dc_created'] = $arg['date'];
-            $option['is_new_post'] = true;
-
-        // 편집일 경우
-        } else {
-
-            $arg['date'] = date('Y-m-d H:i:s');
-            $arg['meta']['dc_modified'] = date('Y-m-d H:i:s');;
-            $option['is_new_post'] = false;
-
-        }
-
         // DB핸들러
         $arg['dbh'] = $option['dbh'] = $CONFIG_DB['handler'];
         // 자료의 언어
@@ -97,8 +79,8 @@ require(INIT_PATH . 'init.head.php');
         // 자체화일이 아닌 외부URL일 경우에 넘어오는 값
         $arg['mapc_url']  = (!empty($_POST['mapc_url']))  ? $_POST['mapc_url']  : $arg['mapc_url'];
 
-        // UID와 LANG값으로 화일명을 지정할 경우 체크
-        $arg['mapc_make_uid_file'] = $_POST['mapc_make_uid_file'];
+        // 화일명을 어떤 형태로 저장할지... (uid = UID.kor.md 형태, date = YYYYMMDD-HHIISS 형태 따위...)
+        $arg['mapc_make_file'] = $_POST['mapc_make_file'];
 
         // mapc_dir 마지막 부분이 /가 아닐 경우 '/'추가
         // (디렉토리명은 반드시 path_a/ path_b/ 처럼 '/'로 마무리해야 됨)
@@ -162,7 +144,7 @@ require(INIT_PATH . 'init.head.php');
                 }
                 // url타입의 경우 "내용" 대신 .URL화일 형식에 맞는 내용 등록하기
                 $arg['content'] = "[InternetShortcut]\nURL=" . $arg['mapc_url'] . "\nIDList=";
-                $arg['mapc_make_uid_file'] = false; // URL값이 넘어올 경우에는 UID.KOR.txt 같은 형태로 저장이 안되게끔 막기
+                $arg['mapc_make_file'] = false; // URL값이 넘어올 경우에는 UID.KOR.txt 같은 형태로 저장이 안되게끔 막기
                 break;
 
             case 'file_uploaded': // 이미 올라간 화일의 경우 선택한 화일에서 필요한 정보들만 가져오기
@@ -183,9 +165,14 @@ require(INIT_PATH . 'init.head.php');
         }
 
 
-        if($arg['mapc_make_uid_file']) {
+        if($arg['mapc_make_file'] == 'uid') {
 
             $file_name = $arg['uid'] . '.' . $option['lang'] . $file_ext;
+            $arg['meta']['rdf_about'] = $file_name;
+
+        } elseif ($arg['mapc_make_file'] == 'date') {
+
+            $file_name = date('Ymd-His');
             $arg['meta']['rdf_about'] = $file_name;
 
         }
@@ -248,7 +235,8 @@ require(INIT_PATH . 'init.head.php');
 
                 }
 
-                $return = mapc_file_mime_type($file_ext);
+                $return = mapc_file_mime_type(strtolower($file_ext));
+
                 $arg['origin_type']         = $return['mime_type'];
                 $arg['meta']['dc_format'][] = $return['mime_type'];
                 $arg['meta']['rdf_about']   = $file_name;
@@ -262,14 +250,15 @@ require(INIT_PATH . 'init.head.php');
                     // "글쓴 날"에 "사진 짝은 날"을, "편집한 날"에 "글을 올리는 날"을 넣음
                     // 예. 1991년 2월 2일에 찍은 사진을 1991년 5월 5일에 올릴 경우 글쓴날은 2월2일 편집한 날은 5월 5일.
                     $exif = @exif_read_data($save_dir . $file_name);
-                    $arg['date_edit'] = $arg['date'];
                     include_once($PATH['mapc']['root'] . 'model/thum_make.func.php');
 
                     // exif에 들어있는 YYYY:MM:DD 형식을 YYYY-MM-DD 형식으로 바꿈 : bisaz
                     $tmp1 = array();
-                    $tmp1 = explode(" ", $exif['DateTimeOriginal']);
+					$tmp_datetime = $exif['DateTimeOriginal'] ? $exif['DateTimeOriginal'] : $exif['DateTime'];
+                    $tmp1 = explode(" ", $tmp_datetime);
                     $tmp2 = explode(":", $tmp1[0]);
-                    $arg['date'] = $arg['meta']['dc_date'][]   = $tmp2[0] . '-' . $tmp2[1] . '-' . $tmp2[2] . ' ' . $tmp1[1];
+
+                    $arg['date'] = $arg['meta']['dc_date'][0]   = $tmp2[0] . '-' . $tmp2[1] . '-' . $tmp2[2] . ' ' . $tmp1[1];
                     unset($tmp1);
                     unset($tmp2);
 
@@ -277,19 +266,46 @@ require(INIT_PATH . 'init.head.php');
                     $option['max'] = 640;
                     $option['copyright'] = $arg['data_dir'] . 'custom/copyright.png';
                     module_mapc_thum_make($save_dir, $save_dir_thum, $file_name, $mime_type[1], $option);
-                    
+
                 } // BLOCK
 
             }
 
         }
 
+
+		{ // BLOCK:date_set:20140320:날짜 등록
+
+	        // 새로등록 할 경우
+	        if($is_new_post) {
+
+	            // 처음 글을 쓰는 경우 그리고 dc_date에 아무값도 안들어왔을 경우에는 현재시간이 dc_date값으로...
+	            $arg['date']     = (! empty($arg['meta']['dc_date'][0])) ? $arg['meta']['dc_date'][0] : date('Y-m-d H:i:s');
+	            $arg['date_utc'] = gmdate('Y-m-d H:i:s');
+	            $arg['meta']['dc_created'][] = $arg['date'];
+	            $arg['meta']['dc_date'][]    = $arg['date'];
+	            $option['is_new_post'] = true;
+	
+	        // 편집일 경우
+	        } else {
+	
+	            $arg['date'] = date('Y-m-d H:i:s');
+	            $arg['meta']['dc_modified'][] = date('Y-m-d H:i:s');;
+	            $option['is_new_post'] = false;
+	
+	        }
+
+            $arg['date_utc'] = gmdate('Y-m-d H:i:s');
+
+		} // BLOCK
+
     } // BLOCK
 
     { // BLOCK:db_update:20131118:DB에 정보 저장
 
         // 원본자료의 위치
-        $arg['origin_url'] = $save_dir2 . $file_name;
+        $arg['origin_url']  = $save_dir2 . $file_name;
+        $arg['origin_type'] = $arg['origin_type'] ? $arg['origin_type'] : $arg['meta']['dc_format'][0];
 
         // 원래의 화일과 지금의 화일이름이 다를 경우 기존 화일 지우고 전체DB업데이트
         // #TODO (post의 status값은 원래 주인이 올린 post는 origina, 다른 사람이 퍼간건 copy라는 값을 넣어서 구분하는게 좋을듯)
@@ -315,7 +331,8 @@ require(INIT_PATH . 'init.head.php');
         }
 
         // 원문이 없을 경우 자료 요약내용을 원문에 넣음
-        $arg['content']    = (! empty($arg['content'])) ? $arg['content'] : $arg['meta']['dc_description'][0];
+        $arg['title']   = $arg['title'] ? $arg['title'] : '제목없음'; // #TODO!!!!! 각각의 언어에 맞게 제목없음이라는 문구를 대체!!!!!!!!!!
+        $arg['content'] = (! empty($arg['content'])) ? $arg['content'] : $arg['meta']['dc_description'][0];
 
         // 자료 요약이 없으면 원문의 앞부분을 "요약(description)"에 넣기
         $arg['meta']['dc_description'][0] = (! empty($arg['meta']['dc_description'][0])) ? $arg['meta']['dc_description'][0] : mb_strimwidth($arg['content'], '0', '255', '...', 'utf-8');
@@ -336,6 +353,7 @@ require(INIT_PATH . 'init.head.php');
 
         include_once($PATH['mapc']['root'] . 'model/post_update.func.php');
         include_once($PATH['mapc']['root'] . 'model/postmeta_insert.func.php');
+
         module_mapc_post_update($arg['uid'], $arg, $option);
         module_mapc_postmeta_insert($arg['uid'], $arg['meta'], $option);
 

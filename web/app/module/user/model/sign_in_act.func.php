@@ -14,15 +14,18 @@
 function mapc_user_sign_in_act(&$user_id, &$user_passwd, &$option)
 { // BLOCK:login_proc:20131005:로그인 처리
 
+    global $CONFIG_DB;
+
 	$pass_key = $option['pass_key'];
 	$dbh      = $option['dbh'];
 
 	// 있는 계정인지 확인
 	$query = "
 		SELECT `user_uid`,  `user_id`, `user_passwd`, `user_email`, `user_type`, `user_status`
-		  FROM `mapc_user`
+		  FROM `" . $CONFIG_DB['prefix'] . "user_info`
 		 WHERE user_id     = ?
 		";
+
 	$sth = $dbh->prepare($query);
 	$sth->execute( array($user_id) );
 	$sign_in_result = $sth->fetch(PDO::FETCH_ASSOC);

@@ -26,7 +26,7 @@ switch($post_info['post_origin_type']) {
 ?>
 
 <section>
-<form method="post" action="<?= $URL['mapc']['edit_act']; ?>" role="form" enctype="multipart/form-data">
+<form method="post" action="<?= $URL['mapc']['edit_act']; ?>" role="form" class="dropzone" enctype="multipart/form-data">
     <?php
         // 한꺼번에 편집 일 경우에는 편집하려는 UID를 표시 (uid1,uid2,uid3...)
         if($mapc_edit_mode == 'batch') {
@@ -67,7 +67,7 @@ switch($post_info['post_origin_type']) {
                 <label>
                     내용
                 </label>
-                <textarea name="post_content" class="form-control wymeditor" style="height: 300px;"><?= htmlspecialchars($post_info['post_content']); ?></textarea>
+                <textarea id="mapc_content_qpab" name="post_content" class="form-control wymeditor" style="height: 300px;"><?= htmlspecialchars($post_info['post_content']); ?></textarea>
             </div>
         </div>
 
@@ -194,6 +194,13 @@ switch($post_info['post_origin_type']) {
         </div>
 
         <div class="form-group">
+            <label>
+                제작일
+            </label>
+            <input type="text" name="meta[dc_created][]" value="<?= $postmeta_info['dc_created'][0]; ?>" class="form-control" />
+        </div>
+
+        <div class="form-group">
             <label class="control-label">
                 기여자(사람, 단체, 서비스 따위)
             </label>
@@ -315,11 +322,14 @@ switch($post_info['post_origin_type']) {
 
     <div class="form-group">
        <label>
-            고유값(특별한 경우 이외에는 빈 칸(자동인식))
+            화일이름 (특별한 경우 이외에는 빈 칸(자동인식))
         </label>
         <input type="text" id="mapc_slug_icaz" name="mapc_slug" value="<?= htmlspecialchars($postmeta_info['slug'][0]); ?>" class="form-control" />
-        <div class="checkbox">
-            <input type="checkbox" name="mapc_make_uid_file" <?= $checked['mapc_make_uid_file']; ?> /> UID값과 언어코드로 화일명 만들기
+        <div class="radio">
+            <input type="radio" name="mapc_make_file" value="uid" <?= $checked['mapc_make_file__uid']; ?> /> UID값과 언어코드로 화일명 만들기 (텍스트폼값은 무시)
+        </div>
+        <div class="radio">
+            <input type="radio" name="mapc_make_file" value="date" <?= $checked['mapc_make_file__date']; ?> /> 현재시간 (텍스트폼값은 무시)
         </div>
     </div>
 
@@ -409,7 +419,6 @@ $(function() {
 
     $('body').on("keydown", ".mapc_subject_abks", function() {
         $(this).autocomplete({
-            minLength: 1,
             source: function( request, response ) {
                 $.getJSON("<?= $URL['mapc']['root']; ?>&core_page=post_uid", {
                     mapc_search_key: extractLast( request.term )
@@ -478,7 +487,6 @@ $(function() {
 
     $('body').on("keydown", ".mapc_type_abks", function() {
         $(this).autocomplete({
-            minLength: 1,
             source: function( request, response ) {
                 $.getJSON("<?= $URL['mapc']['root']; ?>&core_page=post_uid", {
                     mapc_search_key: extractLast( request.term )

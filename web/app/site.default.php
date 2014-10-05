@@ -7,8 +7,6 @@ if(!defined('__MAPC__')) { exit(); }
 
 { // BLOCK:path_set:2012080901:경로지정
 
-	define('SITE_CODE', 'default');
-
 	// 기본디렉토리, 아래의 디렉토리 위치를 다른 곳으로 변경할 경우 이 값을 변경해줘야 함
 	// 디렉토리를 지정할 때는 언제나 뒷부분에 /(슬래시)를 붙여야 합니다. (dir1/(O), dir2(X))
 	define('ROOT_PATH', '../');

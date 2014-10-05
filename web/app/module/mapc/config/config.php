@@ -38,7 +38,7 @@ $URL['mapc']['file_view']= $URL['mapc']['root'] . '&core_page=file';
     $CONFIG_MODL_MAPC['edit']['word']['postmeta_info']['dc_subject_id'][0] = 'A3W1FXJYPZ5EHRTNS8V4';
     $CONFIG_MODL_MAPC['edit']['word']['postmeta_info']['dc_type'][0]    = '정의';
     $CONFIG_MODL_MAPC['edit']['word']['postmeta_info']['dc_type_id'][0] = 'XHVYMN287ZSTF4JWUPQA';
-    $CONFIG_MODL_MAPC['edit']['word']['publish_check_option']['mapc_make_uid_file'] = true;
+    $CONFIG_MODL_MAPC['edit']['word']['publish_check_option']['mapc_make_file__uid'] = true;
 
     // memo : 적바리
     $CONFIG_MODL_MAPC['edit']['memo']['post_info']['post_origin_type']  = 'text/markdown';
@@ -49,10 +49,9 @@ $URL['mapc']['file_view']= $URL['mapc']['root'] . '&core_page=file';
     // diary
     $CONFIG_MODL_MAPC['edit']['diary']['post_info']['post_origin_type']     = 'text/markdown';
     $CONFIG_MODL_MAPC['edit']['diary']['postmeta_info']['mapc_dir'][0]      = '날적이/';
-    $CONFIG_MODL_MAPC['edit']['diary']['postmeta_info']['dc_subject'][0]    = '날적이';
-    $CONFIG_MODL_MAPC['edit']['diary']['postmeta_info']['dc_subject_id'][0] = 'UHFLS46E1B257KDR3YXZ';
-    $CONFIG_MODL_MAPC['edit']['diary']['postmeta_info']['dc_type'][0]    = '이벤트';
-    $CONFIG_MODL_MAPC['edit']['diary']['postmeta_info']['dc_type_id'][0] = 'S9CRMPV82QT6HXLFYDGZ';
+    $CONFIG_MODL_MAPC['edit']['diary']['postmeta_info']['dc_type'][0]    = '날적이';
+    $CONFIG_MODL_MAPC['edit']['diary']['postmeta_info']['dc_type_id'][0] = 'UHFLS46E1B257KDR3YXZ';
+    $CONFIG_MODL_MAPC['edit']['diary']['publish_check_option']['mapc_make_file__date'] = true;
 
     // proverb
     $CONFIG_MODL_MAPC['edit']['proverb']['post_info']['post_origin_type']     = 'text/markdown';

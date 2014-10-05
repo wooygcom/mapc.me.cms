@@ -36,7 +36,7 @@ require(INIT_PATH.'init.head.php');
     $date_start = date('Y-m-d', $_REQUEST['start']);
     $date_end   = date('Y-m-d', $_REQUEST['end']);
 
-    $query = 'SELECT post_uid, post_lang, post_title, post_write_date FROM mapc_post WHERE post_write_date between :mapc_date_start and :mapc_date_end ' . $search_query;
+    $query = 'SELECT post_uid, post_lang, post_title, post_write_date FROM ' . $CONFIG_DB['prefix'] . 'mapc_post WHERE post_write_date between :mapc_date_start and :mapc_date_end ' . $search_query;
 
     $sth = $CONFIG_DB['handler']->prepare($query);
 

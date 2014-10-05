@@ -27,7 +27,7 @@ require(INIT_PATH.'init.head.php');
 
         $query = "
             SELECT post_origin_url
-              FROM mapc_post
+              FROM " . $CONFIG_DB['prefix'] . "mapc_post
              WHERE post_uid  = ?
                AND post_lang = ?
             ";
@@ -39,7 +39,7 @@ require(INIT_PATH.'init.head.php');
 
         $query = "
             SELECT COUNT(post_origin_url) as cnt
-              FROM mapc_post
+              FROM " . $CONFIG_DB['prefix'] . "mapc_post
              WHERE post_origin_url = '" . $return['post_origin_url'] . "'
             ";
         $sth = $CONFIG_DB['handler']->prepare($query);
@@ -66,12 +66,12 @@ require(INIT_PATH.'init.head.php');
 
 	{ // BLOCK:del_article:20131208:글삭제
 
-        $query = " delete from mapc_post where post_uid = ? and post_lang = ? ";
+        $query = " delete from " . $CONFIG_DB['prefix'] . "mapc_post where post_uid = ? and post_lang = ? ";
 
         $sth = $CONFIG_DB['handler']->prepare($query);
         $sth->execute( array($mapc_uid, $mapc_lang) );
 
-        $query = " delete from mapc_postmeta where postmeta_post_uid = ? and (postmeta_lang = ? OR postmeta_lang is null) ";
+        $query = " delete from " . $CONFIG_DB['prefix'] . "mapc_postmeta where postmeta_post_uid = ? and (postmeta_lang = ? OR postmeta_lang is null) ";
 
         $sth = $CONFIG_DB['handler']->prepare($query);
         $sth->execute( array($mapc_uid, $mapc_lang) );
@@ -86,7 +86,7 @@ require(INIT_PATH.'init.tail.php');
 { // View : Head
 
     $display_type = 'move';
-    $url = $URL['mapc']['list'];
+    $url     = $URL['mapc']['list'];
     include PROC_PATH . 'publish_simple.proc.php';
 
 } // View : Tail

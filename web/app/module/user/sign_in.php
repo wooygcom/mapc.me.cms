@@ -23,11 +23,11 @@ require(INIT_PATH . 'init.tail.php');
 
 	{ // BLOCK:echo_view:20130923:화면출력
 
-		$publish_data['layout_path'] = LAYOUT_PATH . $CONFIG['layout'] . '/simple.tpl.php';
+		$publish_data['layout_path'] = LAYOUT_PATH . $CONFIG['layout'] . '/html_simple.tpl.php';
 		$section_file = $PATH['user']['root'] . 'view/basic/sign_in.view.php';
 		include_once(PROC_PATH . 'publish.proc.php');
 
-	}
+	} // BLOCK
 
 } // View : Tail
 

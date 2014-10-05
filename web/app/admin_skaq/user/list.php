@@ -12,7 +12,7 @@ require(INIT_PATH . 'init.head.php');
 
         // 권한체크
         include_once(MODULE_PATH . 'user/model/auth_check.func.php');
-        $result = module_user_auth_check($_SESSION['mapc_user_uid'], 'user_list');
+        $result = module_user_auth_check($_SESSION['mapc_user_uid']);
 
     } // BLOCK
 
@@ -28,7 +28,7 @@ require(INIT_PATH . 'init.head.php');
 
 		$query = "
 			SELECT `user_seq`, `user_uid`, `user_name`, `user_id`, `user_type`, `user_email`, `user_sign_up_date`, `user_sign_in_date_latest`, `user_status`, `user_etc`
-			  FROM mapc_user
+			  FROM " . $CONFIG_DB['prefix'] . "user_info
 			" . $search . "
 			 ORDER BY user_sign_up_date
 			  DESC LIMIT :page, :pageSet

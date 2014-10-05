@@ -24,6 +24,7 @@
 	$LANG['user']['alt_sign_in']	= '로그인 해주세요.';
 	$LANG['user']['alt_sign_in_success'] = '로그인 성공';
 	$LANG['user']['alt_sign_in_error']   = '로그인 에러';
+	$LANG['user']['alt_sign_out_success'] = '로그아웃 성공';
 	$LANG['user']['alt_sign_up_success'] = '회원가입 성공';
 	$LANG['user']['alt_sign_up_error']   = '회원가입 에러';
     $LANG['user']['alt_auth_error'] = '권한이 없습니다.';

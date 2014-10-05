@@ -32,6 +32,6 @@ $CONFIG['meta']['writer'] = '';
 $CONFIG['meta']['robots'] = 'index,follow';
 
 // 기본 언어
-$CONFIG['meta']['content-language'] = 'kor';
+$CONFIG['meta']['content-language'] = $CONFIG['lang'];
 
 // end of file

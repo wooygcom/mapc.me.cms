@@ -128,13 +128,21 @@ function module_mapc_dc_make($file_name, $value, $save_dir = '') {
     }
 
     if(!empty($value['dc_created'])) {
-        $created = $doc->createElement('dc:created', $value['dc_created']);
-        $created = $desc->appendChild($created);
+        foreach($value['dc_created'] as $key => $var) {
+            if( ! empty($var) ) {
+		        $created = $doc->createElement('dc:created', $var);
+		        $created = $desc->appendChild($created);
+			}
+		}
     }
 
     if(!empty($value['dc_modified'])) {
-        $modified = $doc->createElement('dc:modified', $value['dc_modified']);
-        $modified = $desc->appendChild($modified);
+        foreach($value['dc_modified'] as $key => $var) {
+            if( ! empty($var) ) {
+		        $modified = $doc->createElement('dc:modified', $var);
+		        $modified = $desc->appendChild($modified);
+			}
+		}
     }
 
     if(!empty($value['dc_creator'])) {

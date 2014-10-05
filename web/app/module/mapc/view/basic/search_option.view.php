@@ -46,10 +46,12 @@
             <div class="form-group">
 <?php
 echo ' <input type="radio" name="mapc_srch_lang" value="" checked="checked" /> <a href="' . $URL['mapc']['list'] . '&mapc_srch_lang=">모든언어</a> ';
-foreach($so_rlt['dc_language'] as $key => $var) {
-    echo ' <input type="radio" name="mapc_srch_lang" value="' . $var['postmeta_value'] . '" ' . $checked_search[ 'dc_language:' . $var['postmeta_value'] ]. ' /> '
-	   . ' <a href="' . $URL['mapc']['list'] . '&mapc_srch_lang=' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
+if(count($so_rlt['dc_language']) > 0) {
+    foreach($so_rlt['dc_language'] as $key => $var) {
+        echo ' <input type="radio" name="mapc_srch_lang" value="' . $var['postmeta_value'] . '" ' . $checked_search[ 'dc_language:' . $var['postmeta_value'] ]. ' /> '
+           . ' <a href="' . $URL['mapc']['list'] . '&mapc_srch_lang=' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
 
+    }
 }
 ?>
             </div>
@@ -60,10 +62,12 @@ foreach($so_rlt['dc_language'] as $key => $var) {
             </label>
             <div class="form-group">
 <?php
-foreach($so_rlt['dc_subject'] as $key => $var) {
-    echo ' <input type="checkbox" name="mapc_search[]" value="dc_subject:' . $var['postmeta_value'] . '" ' . $checked_search['dc_subject:' . $var['postmeta_value'] ]. ' /> '
-	   . ' <a href="' . $URL['mapc']['list'] . '&mapc_search_key=dc_subject:' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
+if(count($so_rlt['dc_subject']) > 0) {
+    foreach($so_rlt['dc_subject'] as $key => $var) {
+        echo ' <input type="checkbox" name="mapc_search[]" value="dc_subject:' . $var['postmeta_value'] . '" ' . $checked_search['dc_subject:' . $var['postmeta_value'] ]. ' /> '
+           . ' <a href="' . $URL['mapc']['list'] . '&mapc_search_key=dc_subject:' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
 
+    }
 }
 ?>
             </div>
@@ -74,10 +78,12 @@ foreach($so_rlt['dc_subject'] as $key => $var) {
             </label>
             <div class="form-group">
 <?php
-foreach($so_rlt['dc_type'] as $key => $var) {
-    echo ' <input type="checkbox" name="mapc_search[]" value="dc_type:' . $var['postmeta_value'] . '" ' . $checked_search['dc_type:' . $var['postmeta_value'] ]. ' /> '
-	   . ' <a href="' . $URL['mapc']['list'] . '&mapc_search_key=dc_type:' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
+if(count($so_rlt['dc_type']) > 0) {
+    foreach($so_rlt['dc_type'] as $key => $var) {
+        echo ' <input type="checkbox" name="mapc_search[]" value="dc_type:' . $var['postmeta_value'] . '" ' . $checked_search['dc_type:' . $var['postmeta_value'] ]. ' /> '
+           . ' <a href="' . $URL['mapc']['list'] . '&mapc_search_key=dc_type:' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
 
+    }
 }
 ?>
             </div>
@@ -88,10 +94,12 @@ foreach($so_rlt['dc_type'] as $key => $var) {
             </label>
             <div class="form-group">
 <?php
-foreach($so_rlt['dc_format'] as $key => $var) {
-    echo ' <input type="checkbox" name="mapc_search[]" value="dc_format:' . $var['postmeta_value'] . '" ' . $checked_search['dc_format:' . $var['postmeta_value'] ]. ' /> '
-	   . ' <a href="' . $URL['mapc']['list'] . '&mapc_search_key=dc_format:' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
+if(count($so_rlt['dc_format']) > 0) {
+    foreach($so_rlt['dc_format'] as $key => $var) {
+        echo ' <input type="checkbox" name="mapc_search[]" value="dc_format:' . $var['postmeta_value'] . '" ' . $checked_search['dc_format:' . $var['postmeta_value'] ]. ' /> '
+           . ' <a href="' . $URL['mapc']['list'] . '&mapc_search_key=dc_format:' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
 
+    }
 }
 ?>
             </div>
@@ -102,10 +110,12 @@ foreach($so_rlt['dc_format'] as $key => $var) {
             </label>
             <div class="form-group">
 <?php
-foreach($so_rlt['dc_coverage'] as $key => $var) {
-    echo ' <input type="checkbox" name="mapc_search[]" value="dc_coverage:' . $var['postmeta_value'] . '" ' . $checked_search['dc_coverage:' . $var['postmeta_value'] ]. ' /> '
-	   . ' <a href="' . $URL['mapc']['list'] . '&mapc_search_key=dc_coverage:' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
+if(count($so_rlt['dc_coverage']) > 0) {
+    foreach($so_rlt['dc_coverage'] as $key => $var) {
+        echo ' <input type="checkbox" name="mapc_search[]" value="dc_coverage:' . $var['postmeta_value'] . '" ' . $checked_search['dc_coverage:' . $var['postmeta_value'] ]. ' /> '
+           . ' <a href="' . $URL['mapc']['list'] . '&mapc_search_key=dc_coverage:' . $var['postmeta_value'] . '">' . $var['postmeta_value'] . '</a>';
 
+    }
 }
 ?>
             </div>

@@ -14,7 +14,6 @@ require(INIT_PATH . 'init.head.php');
 
 		// 로그아웃하기전에 출력이 필요할 경우 출력... 현재는 sign_out_act를 바로 호출
 		session_destroy();
-		header("Location: " . $URL['core']['root']);
 
 	} // BLOCK
 
@@ -25,7 +24,10 @@ require(INIT_PATH . 'init.tail.php');
 
 { // View : Head
 
-	header("Location: " . $URL['core']['root']);
+    $url     = $URL['core']['main'];
+	$message = $LANG['user']['alt_sign_out_success'];
+	$display_type = 'move';
+    include PROC_PATH . 'publish_simple.proc.php';
 
 } // View : Tail
 

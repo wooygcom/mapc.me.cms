@@ -26,26 +26,11 @@
 		$RDF = str_replace('xmlns:', 'xsi_', $RDF);
 
 		$XML = simplexml_load_string($RDF);
-		$result['rdf_about']	= $XML->rdf_Description->attributes()->rdf_about[0];
-		$result['dc_title']	= $XML->rdf_Description->dc_title;
-		$result['dc_creator']	= $XML->rdf_Description->dc_creator;
-		$result['dc_subject']	= $XML->rdf_Description->dc_subject;
-		$result['dc_description']	= $XML->rdf_Description->dc_description;
-		$result['dc_contributor']	= $XML->rdf_Description->dc_contributor;
-		$result['dc_publisher']	= $XML->rdf_Description->dc_publisher;
-		$result['dc_identifier']	= $XML->rdf_Description->dc_identifier;
-		$result['dc_relation']	= $XML->rdf_Description->dc_relation;
-		$result['dc_source']	= $XML->rdf_Description->dc_source;
-		$result['dc_rights']	= $XML->rdf_Description->dc_rights;
-		$result['dc_format']	= $XML->rdf_Description->dc_format;
-		$result['dc_type']	= $XML->rdf_Description->dc_type;
-		$result['dc_date']	= $XML->rdf_Description->dc_date;
-		$result['dc_created']	= $XML->rdf_Description->dc_created;
-		$result['dc_modified']	= $XML->rdf_Description->dc_modified;
-		$result['dc_coverage']	= $XML->rdf_Description->dc_coverage;
-		$result['dc_language']	= $XML->rdf_Description->dc_language;
 
-		return $result;
+        $namespaces = $XML->getNameSpaces(true);
+        $dc = $XML->children($namespaces['dc']);
+
+		return $dc->rdf_Description;
 
 	}
 

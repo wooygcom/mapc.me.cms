@@ -14,6 +14,8 @@
 function mapc_user_sign_up_act(&$arg, &$option)
 { // BLOCK:sign_up_proc:20131005:회원가입 처리
 
+    global $CONFIG_DB;
+
 	$dbh      = $option['dbh'];
 	$pass_key = $option['pass_key'];
 
@@ -23,7 +25,7 @@ function mapc_user_sign_up_act(&$arg, &$option)
 	$today       = date('Y-m-d H:i:s');
 
 	$query = "
-		INSERT INTO mapc_user
+		INSERT INTO " . $CONFIG_DB['prefix'] . "user_info
 		   SET user_uid    = ?
 		     , user_name   = ?
 			 , user_id     = ?

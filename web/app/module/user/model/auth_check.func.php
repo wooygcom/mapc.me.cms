@@ -3,29 +3,38 @@
  * 권한체크
  *
  * @param string  $user_id User ID
- * @param string  $request_auth 체크하려는 권한
+ * @param string  $auth_require 체크하려는 권한
  * @param string  $option['level'] strict, default
  * @param handler $arg['dbh'] DBhandler
  */
 
-function module_user_auth_check($user_uid, $request_auth, $option = array('level' => 'strict')) {
+function module_user_auth_check($user_uid, $auth_type = 'admin', $auth_require = '', $option = array('level' => 'strict')) {
 
+	global $CONFIG;
     global $CONFIG_DB;
 
-    $user_uid = (! empty($user_uid)) ? $user_uid : 'default';
+	switch($auth_type) {
+		case 'admin':
+			break;
+		default:
+			break;
+	}
+
+    $user_uid     = (! empty($user_uid)) ? $user_uid : 'default';
+	$auth_require = $auth_require ? $auth_require : $auth_type . '||' . $CONFIG['module'] . '||' . $CONFIG['page'];
 
     { // BLOCK:auth_check:20131125:해당 사용자의 권한 체크
 
         $query = "
             select usermeta_user_uid, usermeta_value
-              from mapc_usermeta
+              from " . $CONFIG_DB['prefix'] . "user_infometa
              where usermeta_user_uid = ?
                and usermeta_key      = 'auth'
                and usermeta_value    = ?
         ";
 
         $res = $CONFIG_DB['handler']->prepare($query);
-        $res->execute(array($user_uid, $request_auth));
+        $res->execute(array($user_uid, $auth_require));
         $result = $res->fetch();
 
         if(! empty($result['usermeta_value'])) {
@@ -45,13 +54,13 @@ function module_user_auth_check($user_uid, $request_auth, $option = array('level
 
         $query = "
             select usermeta_user_uid, usermeta_value
-              from mapc_usermeta
+              from " . $CONFIG_DB['prefix'] . "user_infometa
              where usermeta_key   = 'auth'
                and usermeta_value = ?
                and usermeta_user_uid IN
                 (
                     select usermeta_user_uid
-                      from mapc_usermeta
+                      from " . $CONFIG_DB['prefix'] . "user_infometa
                      where usermeta_key   = 'sub_user'
                        and usermeta_value = ?
                 )
@@ -59,7 +68,7 @@ function module_user_auth_check($user_uid, $request_auth, $option = array('level
         ";
 
         $res = $CONFIG_DB['handler']->prepare($query);
-        $res->execute(array($request_auth, $user_uid));
+        $res->execute(array($auth_require, $user_uid));
         $result = $res->fetch();
 
         if(! empty($result['usermeta_value'])) {

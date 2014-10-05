@@ -42,7 +42,7 @@ require(INIT_PATH.'init.head.php');
         // #TODO DB에서 바로불러오는게 아니라 텍스트에 각 검색결과에 따른 이전글 다음글을 저장해놓고 (search_type-text_subject-memo.txt 형태) 불러오기는 어떨까?
 
         $query = "
-            SELECT post_uid FROM mapc_post WHERE post_seq < ? ORDER BY post_seq DESC LIMIT 1
+            SELECT post_uid FROM " . $CONFIG_DB['prefix'] . "mapc_post WHERE post_seq < ? ORDER BY post_seq DESC LIMIT 1
             ";
         $sth = $CONFIG_DB['handler']->prepare($query);
         $sth->execute(array($post_info['post_seq']));
@@ -50,11 +50,11 @@ require(INIT_PATH.'init.head.php');
 
     } // BLOCK
 
-    { // BLOCK:get_another_lang:20131230:다른 언어로 된 글 제목 가져오기
+    { // BLOCK:get_another_lang:20131230:덧붙임1. 다른 언어로 된 글 제목 가져오기
 
         $query = "
             select postmeta_lang, postmeta_value
-              from mapc_postmeta
+              from " . $CONFIG_DB['prefix'] . "mapc_postmeta
              where postmeta_key = 'dc_title'
                and postmeta_post_uid = ?
             ";
@@ -64,6 +64,20 @@ require(INIT_PATH.'init.head.php');
 
     } // BLOCK
 
+    { // BLOCK:get_another_lang:20131230:덧붙임2. 이 글을 연결하고 있는 다른 글들
+
+        $query = "
+            select postmeta_lang, postmeta_value
+              from " . $CONFIG_DB['prefix'] . "mapc_postmeta
+             where postmeta_key = 'dc_title'
+               and postmeta_post_uid = ?
+            ";
+        $sth = $CONFIG_DB['handler']->prepare($query);
+        $sth->execute(array($arg['mapc_uid']));
+        $title_another_lang = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+    } // BLOCK
+    
     { // BLOCK:get_data:2012081701:읽으려는 파일의 종류, 파일 위치 가져오기
 
         include($PATH['mapc']['root'] . 'model/convert_file.func.php');
@@ -80,10 +94,12 @@ require(INIT_PATH.'init.tail.php');
     $publish_data['head']['meta'] = $CONFIG['meta'];
     $publish_data['head']['meta']['title']       = $post_info['post_title'] . ' - ' . $publish_data['head']['meta']['title'];
     $publish_data['head']['meta']['type']        = $post_info['post_origin_type'];
+    // 원본그림
     if(strpos($post_info['post_origin_type'], 'image/') == true) {
         $publish_data['head']['meta']['image']   = $post_info['post_origin_url'];
+    // 원본이 없으면 기본 이미지
     } else {
-        // #TODO 사이트 기본 이미지
+        // #TODO 사이트 기본이미지
     }
     // #TODO mod_rewrite에서 /module/page/[글번호] 가져올 수 있게끔 처리!!!
     $publish_data['head']['meta']['url']         = $URL['mapc']['view'] . '&mapc_uid=' . $arg['mapc_uid'];

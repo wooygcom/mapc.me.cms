@@ -44,7 +44,7 @@ if(!defined('__MAPC__')) { exit(); }
 
 	if(empty($publish_data['layout_path'])) {
 
-		$publish_data['layout_path'] = LAYOUT_PATH . $CONFIG['layout'] . '/default.tpl.php';
+		$publish_data['layout_path'] = LAYOUT_PATH . $CONFIG['layout'] . '/html_default.tpl.php';
 
 	}
 

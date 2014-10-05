@@ -11,7 +11,7 @@ if(!defined('__MAPC__')) { exit(); }
 $CONFIG['meta']['title'] = '사이트 제목';
 
 // 저작권자 지정
-$CONFIG['meta']['copyright'] = 'WooYG.com';
+$CONFIG['meta']['copyright'] = '[YOURSITEDOMAIN].com';
 
 // 키워드 지정
 $CONFIG['meta']['keywords'] = '';
@@ -32,6 +32,6 @@ $CONFIG['meta']['writer'] = '';
 $CONFIG['meta']['robots'] = 'all';
 
 // 기본 언어
-$CONFIG['meta']['content-language'] = 'kor';
+$CONFIG['meta']['content-language'] = $CONFIG['lang'];
 
 // end of file

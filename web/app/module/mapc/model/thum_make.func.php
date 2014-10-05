@@ -11,9 +11,15 @@
  * @param string $option['copyright'] 카피라이트 그림
  *
  * @return bool $return 성공여부 (함수가 실행됨과 동시에 썸네일을 만들고 저장하는 방식이라 특별한 리턴값이 필요없음)
+ * 
+ * @exam
+    $option['min'] = 480;
+    $option['max'] = 640;
+    $option['copyright'] = $arg['data_dir'] . 'custom/copyright.png';
+    module_mapc_thum_make($save_dir, $save_dir_thum, $file_name, $mime_type[1], $option);
  */
 
-function module_mapc_thum_make($path_original, $path_thum, $file_name, $mime_type, $option = array('max' => 640, 'min' => 480)) {
+function module_mapc_thum_make($path_original, $path_thum, $file_name, $mime_type, $option = array('max' => 1024, 'min' => 768)) {
 
     // 이미지 비율 조정값 구하는 함수
     include_once(LIBRARY_PATH . 'mapc/img_resize_value.func.php');
@@ -37,6 +43,7 @@ function module_mapc_thum_make($path_original, $path_thum, $file_name, $mime_typ
     $temp_size = mapc_img_resize_value($pic[0], $pic[1], $thum_width, $thum_height);
     $thum_width = $temp_size[0];
     $thum_height= $temp_size[1];
+
     $thum   = imagecreatetruecolor($thum_width, $thum_height);
     imagecopyresampled($thum, $origin, 0, 0, 0, 0, $thum_width, $thum_height, $pic[0], $pic[1]);
 
@@ -47,13 +54,12 @@ function module_mapc_thum_make($path_original, $path_thum, $file_name, $mime_typ
         $img_copy_height = imagesy($img_copyright);
         $destX = ($thum_width  - $img_copy_width) - 10;
         $destY = ($thum_height - $img_copy_height) / 1;
-        $white = imagecolorexact($img_copyright, 255, 255, 255);
-        imagecolortransparent($img_copyright, $white);
-        imagecopymerge($thum, $img_copyright, $destX, $destY, 0, 0, $img_copy_width, $img_copy_height, 50);
+
+        imagecopymerge($thum, $img_copyright, $destX, $destY, 0, 0, $img_copy_width, $img_copy_height, 30);
     }
 
     $image_func($thum, $path_thum . $file_name);
 
-} // BLOCK
+}
 
 // this is it

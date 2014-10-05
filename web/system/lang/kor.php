@@ -26,6 +26,7 @@
 	$LANG['core']['suc_submit'] = '처리되었습니다.';
 	$LANG['core']['err_submit'] = '처리 중 에러가 발생했습니다.';
 
+	$LANG['core']['home']   = '처음으로';
 	$LANG['core']['submit'] = '확인';
 	$LANG['core']['cancel'] = '취소';
 

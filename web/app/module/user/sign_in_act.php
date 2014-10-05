@@ -43,19 +43,22 @@ require(INIT_PATH . 'init.tail.php');
 			$_SESSION['mapc_user_type']   = $sign_in_return['type'];
 			$_SESSION['mapc_user_status'] = $sign_in_return['status'];
 
-			echo $LANG['user']['alt_sign_in_success'];
+		    $display_type = 'move';
+			$message = $LANG['user']['alt_sign_in_success'];
 
 		} else {
 
 			unset($_SESSION);
 
-			echo $LANG['user']['alt_sign_in_error'] ;
+		    $display_type = 'message';
+			$message = $LANG['user']['alt_sign_in_error'] ;
 
 		}
 
 	} // BLOCK
 
-	header("Location: " . $URL['core']['root']);
+    $url     = $URL['core']['main'];
+    include PROC_PATH . 'publish_simple.proc.php';
 
 } // View : Tail
 

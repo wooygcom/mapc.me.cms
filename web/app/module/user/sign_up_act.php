@@ -51,19 +51,10 @@ require(INIT_PATH . 'init.tail.php');
 
 { // View : Head
 
-	{ // BLOCK:echo_view:20130923:화면출력
-
-		if($return['result']) {
-
-			echo $LANG['user']['alt_sign_up_success'];
-
-		} else {
-
-			echo $return['status'];
-
-		}
-
-	} // BLOCK
+    $display_type = 'message';
+    $message = $LANG['user']['alt_sign_up_success'] ;
+    $url     = $URL['core']['main'];
+    include PROC_PATH . 'publish_simple.proc.php';
 
 } // View : Tail
 

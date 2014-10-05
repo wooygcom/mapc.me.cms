@@ -49,7 +49,10 @@ require(INIT_PATH.'init.head.php');
 		$data_file = $postmeta_info['mapc_dir'][0] . $postmeta_info['rdf_about'][0];
 		$arg['file_name_qwer'] = $data_file;
 		$tmp = pathinfo($postmeta_info['rdf_about'][0]);
-		$postmeta_info['slug'][0] = $tmp['filename'];
+        // $tmp['filename']을 그대로 slug에 넣으려 했으나 한글화일은 깨지는 경우가 생겨서 원래 이름에 확장자를 지우는 형태로 함
+        // "한-글-화-일.txt" 라는 화일을 pathinfo함수에서 돌렸더 ""-글-화-일.txt"" 처럼 깨져버림;;;
+		// $postmeta_info['slug'][0] = $tmp['filename'];
+		$postmeta_info['slug'][0] = str_replace('.'.$tmp['extension'], '', $postmeta_info['rdf_about'][0]);
 
 	} // BLOCK
 
@@ -92,6 +95,11 @@ require(INIT_PATH.'init.tail.php');
     $publish_data['head']['css']['jquery-ui.min.css'] = $URL['core']['root'] . 'res/jquery-ui/css/default/';
     $publish_data['head']['js']['jquery.min.js']      = $URL['core']['root'] . 'res/jquery/';
     $publish_data['head']['js']['jquery-ui.min.js']   = $URL['core']['root'] . 'res/jquery-ui/js/';
+
+	if(false) { // dropzone을 사용할 경우에만 true // #TODO dropzone을 사용할지 여부(또는 어떤 업로드 모듈을 사용할지 옵션을 지정할 수 있게...)
+	    $publish_data['head']['css']['dropzone.css'] = $URL['core']['root'] . 'res/dropzone/css/';
+	    $publish_data['head']['js']['dropzone.min.js']   = $URL['core']['root'] . 'res/dropzone/';
+	}
 
     $section_file = $PATH['mapc']['root'] . 'view/basic/edit.view.php';
 	include_once(PROC_PATH . 'publish.proc.php');

@@ -43,7 +43,7 @@ if(!defined('__MAPC__')) { exit(); }
 	$CONFIG['layout']	= 'basic';	// 기본 레이아웃
 
     $CONFIG['admin']    = !empty($temp['admn']) ? $temp['admn'] : '';    // admin module
-    $CONFIG['module']   = !empty($temp['modl']) ? $temp['modl'] : '';    // default module
+    $CONFIG['module']   = !empty($temp['modl']) ? $temp['modl'] : 'home';    // default module
     $CONFIG['module']   = !empty($temp['admn']) ? $temp['admn'] : $CONFIG['module'];    // admin에 값이 있을 경우 $CONFIG['module']은 admin값을 따름
     $CONFIG['page']     = !empty($temp['page']) ? $temp['page'] : 'dashboard';    // default page
     $CONFIG['lang']     = !empty($temp['lang']) ? $temp['lang'] : 'kor';  // 기본언어

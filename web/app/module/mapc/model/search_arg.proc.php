@@ -66,7 +66,7 @@
         // 쿼리에 필요한 갯수(tbl0, tbl1, tbl2...)
         $i=0;
         $table_name = 'tbl' . $i;
-        $search_query_start = " SELECT " . $table_name . ".postmeta_post_uid FROM mapc_postmeta " . $table_name;
+        $search_query_start = " SELECT " . $table_name . ".postmeta_post_uid FROM " . $CONFIG_DB['prefix'] . "mapc_postmeta " . $table_name;
 
         foreach($mapc_search as $key => $var) {
 
@@ -86,7 +86,7 @@
                     $i++;
                     $table_name = 'tbl' . $i;
                     $search_condit = ' (tbl0.postmeta_post_uid = tbl1.postmeta_post_uid) AND ';
-                    $search_query_table .= ' , mapc_postmeta ' . $table_name;
+                    $search_query_table .= ' , ' . $CONFIG_DB['prefix'] . 'mapc_postmeta ' . $table_name;
                     $search_query .= ' ) AND ( ';
                     $temp_conn = '';
                 }

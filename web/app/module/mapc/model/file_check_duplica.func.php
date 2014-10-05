@@ -10,9 +10,11 @@
  */
 function module_mapc_file_check_duplica($file_path, $dbh) {
 
+    global $CONFIG_DB;
+
     $query = "
         SELECT COUNT(post_origin_url) as cnt
-          FROM mapc_post
+          FROM " . $CONFIG_DB['prefix'] . "mapc_post
          WHERE post_origin_url = ?
         ";
     $sth = $dbh->prepare($query);

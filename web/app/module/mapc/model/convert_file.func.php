@@ -19,9 +19,7 @@ function module_mapc_convert_file($type, $origin_file, &$content, $option = arra
             $file_thum = str_replace('/original/', '/thum/', $origin_file);
             $file_url = is_file($file_thum) ? $file_thum : $origin_file;
 
-            // #TODO 큼지막한 화일 바로보기 기능
-            // #TODO 큼지막한 화일에도 copyright기능
-            echo '<a href="#dummy" data-link="' . $URL['mapc']['file_view'] . '&mapc_uid=' . $option['post_uid'] . '"><img src="' . $file_url . '" style="width:100%;" /></a>';
+            echo '<a href="' . $URL['mapc']['file_view'] . '&mapc_uid=' . $option['post_uid'] . '"><img src="' . $file_url . '" style="width:100%;" /></a>';
             echo '<p>' . $content . '</p>';
             break;
 
@@ -32,7 +30,17 @@ function module_mapc_convert_file($type, $origin_file, &$content, $option = arra
             break;
 
         case 'text/markdown':
-            require($PATH['mapc']['root'] . 'model/convert_md_to_html.proc.php');
+			// 원본글의 경로를 기준으로 이미지 기준경로 찾기
+			$tmp_file  = pathinfo($origin_file);
+			$path_info = $tmp_file['dirname'];
+            $path_info = str_replace('/original/', '/thum/', $path_info);
+
+			// 마크다운 변환 : $content_html = Parsedown::instance()->parse($content);
+            require_once LIBRARY_PATH . 'parsedown/Parsedown.php';
+            $parse = new Parsedown;
+            $parse->setImagePath($path_info . '/');
+            $content_html = $parse->parse($content);
+
             echo $content_html;
             break;
 
