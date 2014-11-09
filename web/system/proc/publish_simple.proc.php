@@ -9,13 +9,21 @@
  *
  * @example
  * 		$display_type = 'message';
- * 		$message = $LANG['user']['alt_sign_in_success'] ;
+ * 		$message = _('로그인 되었습니다.');
  * 		$url     = $URL['core']['root'];
  * 		include PROC_PATH . 'publish_simple.proc.php';
  * 
  */
 
 if(!defined('__MAPC__')) { exit(); }
+
+{ // BLOCK:unset_security_var:2014-11-08:템플릿 출력에는 불필요한 환경설정 변수 삭제
+
+	unset($CONFIG_SECRET);
+	unset($CONFIG_DB);
+
+} // BLOCK
+
 
 { // BLOCK:publish_hook_include:2013-01-21:publish hook 파일 첨부
 

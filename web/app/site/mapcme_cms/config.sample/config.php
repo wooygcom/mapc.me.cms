@@ -18,8 +18,6 @@ if(!defined('__MAPC__')) { exit(); }
 	$temp['admn'] = htmlspecialchars($_REQUEST['core_admn']);
 	// 페이지 지정하지 않았을 경우 기본 페이지
 	$temp['page'] = htmlspecialchars($_REQUEST['core_page']);
-	// 사용할 언어
-	$temp['lang'] = htmlspecialchars($_REQUEST['core_lang']);
 	// 기본 출력(html, json, etc...)
 	$temp['show'] = htmlspecialchars($_REQUEST['core_show']);
 
@@ -34,9 +32,13 @@ if(!defined('__MAPC__')) { exit(); }
 
 { // BLOCK:normar_config:20121202
 
+	/**
+	 * 기본 설정
+	 */
 	date_default_timezone_set('Asia/Seoul');	// 기본시간대
 
 	$CONFIG = array();
+
 	$CONFIG['encode']	= 'utf-8';	// 기본 인코딩, default encoding
 	$CONFIG['utc']		= date('P'); // UTC 시차 (+09:00 형태)
 	$CONFIG['email']	= '';       // 관리자 이메일
@@ -48,20 +50,39 @@ if(!defined('__MAPC__')) { exit(); }
     $CONFIG['page']     = !empty($temp['page']) ? $temp['page'] : 'dashboard';    // default page
     $CONFIG['lang']     = !empty($temp['lang']) ? $temp['lang'] : 'kor';  // 기본언어
     $CONFIG['show']     = !empty($temp['show']) ? $temp['show'] : 'html'; // 기본화면출력 : html, html_emb(embed형식), html_cont(head,body태그 빼고 내용만 출력), xml, docbook, json
-
 	unset($temp);
 
-} // BLOCK
+	/**
+	 * 메타데이터 설정
+	 */
 
-
-/**
- * 메타데이터 지정
- */
-{ // BLOCK:meta_data:20131209:메타데이터 지정
-
-    // $CONFIG['meta'] 값 가져오기
-    include(CONFIG_PATH . 'meta.lang_' . $CONFIG['lang'] . '.php');
-
+	// 사이트 제목 지정
+	$CONFIG['meta']['title'] = _('사이트 제목');
+	
+	// 저작권자 지정
+	$CONFIG['meta']['copyright'] = _('[YOURSITEDOMAIN].com');
+	
+	// 키워드 지정
+	$CONFIG['meta']['keywords'] = _('Keywords');
+	
+	// 사이트 주제(문장)
+	$CONFIG['meta']['subject'] = _('');
+	
+	// 사이트 설명
+	$CONFIG['meta']['description'] = _('');
+	
+	// 권한자
+	$CONFIG['meta']['author'] = _('');
+	
+	// 작성자
+	$CONFIG['meta']['writer'] = _('');
+	
+	// 웹로봇 설정
+	$CONFIG['meta']['robots'] = _('all');
+	
+	// 기본 언어
+	$CONFIG['meta']['content-language'] = _('ko');
+    
 } // BLOCK
 
 

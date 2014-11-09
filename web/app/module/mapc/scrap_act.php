@@ -7,14 +7,14 @@ if(!defined('__MAPC__')) { exit(); }
 
 // #TODO 같은 코드 다른 언어를 스크랩할 때 제대로 못불러오는 듯함... N59MB4HTLDZJ13EXRVUK (레고)를 스크랩할 때 eng만 등록되고 kor은 등록 안됨
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
     { // BLOCK:auth_check:20131123:권한체크
 
         // 권한체크
         include_once(MODULE_PATH . 'user/model/auth_check.func.php');
-        module_user_auth_check($_SESSION['mapc_user_uid'], 'scrap');
+        module_user_auth_check($_SESSION['mapc_user_uid'], '', 'scrap');
 
     } // BLOCK
 
@@ -408,7 +408,6 @@ require(INIT_PATH.'init.head.php');
     } // switch($_REQUEST['scrap_type'])
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
 
 // ======================================================================
 

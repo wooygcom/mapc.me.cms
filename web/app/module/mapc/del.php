@@ -5,7 +5,7 @@ if(!defined('__MAPC__')) { exit(); }
  * 글편집
  */
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
 	{ // BLOCK:auth_check:20131111:권한체크
@@ -79,7 +79,6 @@ require(INIT_PATH.'init.head.php');
 	} // BLOCK
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
 
 // ======================================================================
 

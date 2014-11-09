@@ -60,7 +60,7 @@
 <!-- 본문:H -->
             <h2><a href="<?= $url; ?>"><?= $message; ?></a></h2>
             <br />
-            <a href="<?= $url; ?>" class="btn btn-primary btn-lg" role="button"><?= $LANG['core']['home']; ?></a>
+            <a href="<?= $url; ?>" class="btn btn-primary btn-lg" role="button"><?= _('처음으로'); ?></a>
 <!-- 본문:T -->
 
         </div>

@@ -1,1 +1,5 @@
-<META http-equiv="refresh" content="0; URL=app/">
+<?php
+
+header('Location: app/');
+
+// end of file

@@ -7,7 +7,7 @@ if(!defined('__MAPC__')) { exit(); }
  * 
  */
 
-require(INIT_PATH . 'init.head.php');
+require(INIT_PATH . 'init.db.php');
 { // Model : Head
 
 	{ // BLOCK:process:20131004:로그인 프로세스
@@ -28,7 +28,6 @@ require(INIT_PATH . 'init.head.php');
 	} // BLOCK
 
 } // Model : Tail
-require(INIT_PATH . 'init.tail.php');
 
 // ======================================================================
 
@@ -44,14 +43,14 @@ require(INIT_PATH . 'init.tail.php');
 			$_SESSION['mapc_user_status'] = $sign_in_return['status'];
 
 		    $display_type = 'move';
-			$message = $LANG['user']['alt_sign_in_success'];
+			$message = _('로그인 되었습니다.');
 
 		} else {
 
 			unset($_SESSION);
 
 		    $display_type = 'message';
-			$message = $LANG['user']['alt_sign_in_error'] ;
+			$message = _('회원가입에 문제가 발생했습니다.');
 
 		}
 

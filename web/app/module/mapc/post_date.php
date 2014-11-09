@@ -7,7 +7,7 @@
  *
  */
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
     { // BLOCK:search_query:20140101:입력값 체크
@@ -59,7 +59,6 @@ require(INIT_PATH.'init.head.php');
     }
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
 
 // ======================================================================
 

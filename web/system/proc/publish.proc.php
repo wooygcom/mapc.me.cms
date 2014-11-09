@@ -1,14 +1,24 @@
 <?php
 /**
+ * 
  * 화면출력 일괄처리
  *
  * @param string $publish_data['layout_path'] Path of Layout files
  * @example
 	$publish_data['layout_path'] = LAYOUT_PATH . 'basic/';
 	include_once(PROC_PATH . 'publish.proc.php');
+ * 
  */
 
 if(!defined('__MAPC__')) { exit(); }
+
+{ // BLOCK:unset_security_var:2014-11-08:템플릿 출력에는 불필요한 환경설정 변수 삭제
+
+	unset($CONFIG_SECRET);
+	unset($CONFIG_DB);
+
+} // BLOCK
+
 
 { // BLOCK:publish_hook_include:2013-01-21:publish hook 파일 첨부
 

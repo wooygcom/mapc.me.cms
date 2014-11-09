@@ -5,7 +5,7 @@ if(!defined('__MAPC__')) { exit(); }
  * 회원가입 처리
  */
 
-require(INIT_PATH . 'init.head.php');
+require(INIT_PATH . 'init.db.php');
 { // Model : Head
 
 	{ // BLOCK:process:20131004:로그인 프로세스
@@ -29,12 +29,12 @@ require(INIT_PATH . 'init.head.php');
 		if($arg['user_passwd'] !== $arg['user_passwd_confirm']) {
 
 			$return['result'] = false;
-			$return['status'] = $LANG['user']['alt_passwd_confirm_not_same'];
+			$return['status'] = _('암호와 암호확인은 같아야 합니다.');
 
 		} elseif(!filter_var($arg['user_email'], FILTER_VALIDATE_EMAIL)) {
 		
 			$return['result'] = false;
-			$return['status'] = $LANG['user']['alt_email_not_valid'];
+			$return['status'] = _('이메일 형태가 올바르지 않습니다.');
 
 		} else {
 
@@ -45,14 +45,13 @@ require(INIT_PATH . 'init.head.php');
 	} // BLOCK
 
 } // Model : Tail
-require(INIT_PATH . 'init.tail.php');
 
 // ======================================================================
 
 { // View : Head
 
     $display_type = 'message';
-    $message = $LANG['user']['alt_sign_up_success'] ;
+    $message = _('회원가입을 축하합니다.');
     $url     = $URL['core']['main'];
     include PROC_PATH . 'publish_simple.proc.php';
 

@@ -5,7 +5,7 @@ if(!defined('__MAPC__')) { exit(); }
  * 글목록
  */
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
     { // BLOCK:personal_info_get:2013-01-18:로그인한 사용자의 개별 디렉터리 반환
@@ -160,7 +160,6 @@ require(INIT_PATH.'init.head.php');
     } // if($mapc_cate != 'tag') } else {
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
 
 // ======================================================================
 

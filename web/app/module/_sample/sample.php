@@ -5,11 +5,10 @@ if(!defined('__MAPC__')) { exit(); }
  * 페이지 설명
  */
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
 
 // ======================================================================
 

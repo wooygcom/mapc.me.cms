@@ -16,7 +16,7 @@ if(!defined('__MAPC__')) { exit(); }
 		define('ADMIN_PATH',  APP_PATH . 'admin_skaq/');	// 관리자 프로그램 모음, Admin Directory
 		define('LAYOUT_PATH', APP_PATH . 'layout/');
 		define('MODULE_PATH', APP_PATH . 'module/');	// 모듈 디렉토리, Module Directory
-		define('RES_PATH',  APP_PATH . 'res/');	// Resources
+		define('PLUGIN_PATH',  APP_PATH . 'plugin/');	// Resources
 		define('SITE_PATH',   APP_PATH . 'site/' . SITE_CODE . '/');	// Specialize for each site, You can change this if you use another site.
 
         if(is_dir(SITE_PATH . 'config/')) { // 실제 config 디렉토리가 있을 경우 [config]이 환경설정 디렉터리
@@ -27,7 +27,6 @@ if(!defined('__MAPC__')) { exit(); }
 
 	define('SYSTEM_PATH',  ROOT_PATH.'system/');
 		define('INIT_PATH',    SYSTEM_PATH .'init/');
-		define('LANG_PATH',    SYSTEM_PATH .'lang/');
 		define('LIBRARY_PATH', SYSTEM_PATH .'library/');
 		define('PROC_PATH',    SYSTEM_PATH .'proc/');
 
@@ -54,28 +53,6 @@ if(!defined('__MAPC__')) { exit(); }
 	 */
 	if(is_file(CONFIG_PATH . 'custom.php')) {
 		include_once(CONFIG_PATH . 'custom.php');
-	}
-
-} // BLOCK
-
-/**
- * 페이지 불러오기
- */
-
-{ // BLOCK:page_load:2012080901:페이지 불러오기
-
-	if($CONFIG['admin']) {
-
-		include_once( ADMIN_PATH . $CONFIG['admin'] . '/' . $CONFIG['page'] . '.php' );
-
-	} else if($CONFIG['module'] == 'home') {
-
-		include_once( SITE_PATH . $CONFIG['page'] . '.php' );
-
-	} else {
-
-		include_once( MODULE_PATH . $CONFIG['module'] . '/' . $CONFIG['page'] . '.php' );
-
 	}
 
 } // BLOCK

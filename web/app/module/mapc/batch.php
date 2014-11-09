@@ -4,11 +4,10 @@ if(!defined('__MAPC__')) { exit(); }
  * 일괄편집
  */
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
 
 // ======================================================================
 

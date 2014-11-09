@@ -8,7 +8,7 @@ if(!defined('__MAPC__')) { exit(); }
 // #TODO 제목 -> SLUG로 바꿀 때 특수문자 제거 (쌍따옴표 마침표 따위)
 // #TODO 마크다운 또는 텍스트는 첫줄(제목)을 생략하고 출력
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
     { // BLOCK:post_get:20131023:글 정보 가져오기
@@ -85,7 +85,6 @@ require(INIT_PATH.'init.head.php');
     } // BLOCK
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
 
 // ======================================================================
 

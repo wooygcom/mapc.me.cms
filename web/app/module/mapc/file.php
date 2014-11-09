@@ -5,7 +5,7 @@ if(!defined('__MAPC__')) { exit(); }
  * 화일 출력
  */
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
     { // BLOCK:auth_check:20131123:권한체크
@@ -72,7 +72,11 @@ require(INIT_PATH.'init.head.php');
 			// merge images
 			imagecopy($base_image, $image, 0, 0, 0, 0, $size[0], $size[1]);
 			imagecopymerge($base_image, $watermark, $dest_x, $dest_y, 0, 0, $watermark_width, $watermark_height, 50);
-			
+
+} // Model : Tail
+
+{ // View : Head
+
 			// imagecopymerge($image, $watermark, $dest_x, $dest_y, 0, 0, $watermark_width, $watermark_height, 50);
 			header('Content-type: image/jpeg');
 			imagejpeg($base_image);
@@ -83,7 +87,6 @@ require(INIT_PATH.'init.head.php');
             break;
     }
 
-} // Model : Tail
-require(INIT_PATH.'init.tail.php');
+} // View : Tail
 
 // this is it

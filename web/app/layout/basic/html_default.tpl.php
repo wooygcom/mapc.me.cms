@@ -6,10 +6,10 @@
  * @param string $_SESSION['mapc_user_status'] (normal, vip, banned, etc...)
  */
 if($_SESSION['mapc_user_id']) {
-	$sign_inout_title = $LANG['user']['sign_out'];
+	$sign_inout_title = _('나가기');
 	$sign_inout_url   = $URL['user']['sign_out'];
 } else {
-	$sign_inout_title = $LANG['user']['sign_in'];
+	$sign_inout_title = _('들어가기');
 	$sign_inout_url   = $URL['user']['sign_in'];
 }
 ?>

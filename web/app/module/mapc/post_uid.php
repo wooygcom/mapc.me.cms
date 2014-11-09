@@ -7,11 +7,11 @@
  *
  */
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
     $mapc_search_key = $_REQUEST['mapc_search_key'];
-    $query = 'SELECT post_uid, post_title, post_content FROM " . $CONFIG_DB['prefix'] . "mapc_post WHERE post_title like "%' . $mapc_search_key . '%"';
+    $query = 'SELECT post_uid, post_title, post_content FROM ' . $CONFIG_DB['prefix'] . ' mapc_post WHERE post_title like "%' . $mapc_search_key . '%"';
 
     $sth = $CONFIG_DB['handler']->prepare($query);
     $sth->execute();
@@ -26,7 +26,6 @@ require(INIT_PATH.'init.head.php');
     }
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
 
 // ======================================================================
 

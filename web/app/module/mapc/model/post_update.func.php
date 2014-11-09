@@ -24,7 +24,7 @@ function module_mapc_post_update(&$uid, &$post_info, &$arg = array()) {
     if($arg['is_new_post']) {
 
         $query = "
-            INSERT INTO mapc_post
+            INSERT INTO mc_mapc_post
                 SET post_title      = :title
                   , post_lang       = :lang
                   , post_content    = :content
@@ -44,7 +44,7 @@ function module_mapc_post_update(&$uid, &$post_info, &$arg = array()) {
     } else {
 
         $query = "
-            UPDATE mapc_post
+            UPDATE mc_mapc_post
                 SET post_title      = :title
                   , post_content    = :content
                   , post_edit_date_latest = :date 

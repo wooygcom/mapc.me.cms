@@ -5,7 +5,7 @@ if(!defined('__MAPC__')) { exit(); }
  * 권한 설정
  */
 
-require(INIT_PATH.'init.head.php');
+require(INIT_PATH.'init.db.php');
 { // Model : Head
 
 	{ // BLOCK:argument_check:20140717:넘김값 체크
@@ -43,7 +43,7 @@ require(INIT_PATH.'init.head.php');
 	} // BLOCK
 
 } // Model : Tail
-require(INIT_PATH.'init.tail.php');
+
 
 // ======================================================================
 
