@@ -69,12 +69,12 @@ require(INIT_PATH.'init.db.php');
         $query = "
             select postmeta_lang, postmeta_value
               from " . $CONFIG_DB['prefix'] . "mapc_postmeta
-             where postmeta_key = 'dc_title'
+             where postmeta_key = 'dc_subject'
                and postmeta_post_uid = ?
             ";
         $sth = $CONFIG_DB['handler']->prepare($query);
         $sth->execute(array($arg['mapc_uid']));
-        $title_another_lang = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $title_TEMP = $sth->fetchAll(PDO::FETCH_ASSOC);
 
     } // BLOCK
     
@@ -94,6 +94,7 @@ require(INIT_PATH.'init.db.php');
     $publish_data['head']['meta']['title']       = $post_info['post_title'] . ' - ' . $publish_data['head']['meta']['title'];
     $publish_data['head']['meta']['type']        = $post_info['post_origin_type'];
     // 원본그림
+    
     if(strpos($post_info['post_origin_type'], 'image/') == true) {
         $publish_data['head']['meta']['image']   = $post_info['post_origin_url'];
     // 원본이 없으면 기본 이미지

@@ -23,7 +23,7 @@ function module_mapc_postmeta_insert(&$uid, &$meta, &$option = array()) {
     $option['dbh']->exec($query);
 
 	$query = "
-		INSERT INTO mapc_postmeta
+		INSERT INTO " . $CONFIG_DB['prefix'] . "mapc_postmeta
 		   SET postmeta_lang     = ?
              , postmeta_post_uid = ?
 			 , postmeta_key      = ?

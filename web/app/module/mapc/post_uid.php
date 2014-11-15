@@ -10,11 +10,11 @@
 require(INIT_PATH.'init.db.php');
 { // Model : Head
 
-    $mapc_search_key = $_REQUEST['mapc_search_key'];
-    $query = 'SELECT post_uid, post_title, post_content FROM ' . $CONFIG_DB['prefix'] . ' mapc_post WHERE post_title like "%' . $mapc_search_key . '%"';
+    $mapc_search_key = '%' . $_REQUEST['mapc_search_key'] . '%';
+    $query = 'SELECT post_uid, post_title, post_content FROM ' . $CONFIG_DB['prefix'] . 'mapc_post WHERE post_title like :search_key ';
 
     $sth = $CONFIG_DB['handler']->prepare($query);
-    $sth->execute();
+    $sth->execute(array(':search_key' => $mapc_search_key));
 
     $return = $sth->fetchAll(PDO::FETCH_ASSOC);
 

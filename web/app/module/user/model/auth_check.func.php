@@ -8,7 +8,7 @@
  * @param handler $arg['dbh'] DBhandler
  */
 
-function module_user_auth_check($user_uid, $auth_type = 'admin', $auth_require = '', $option = array('level' => 'strict')) {
+function module_user_auth_check($user_uid, $auth_require = '', $auth_type = 'admin', $option = array('level' => 'strict')) {
 
 	global $CONFIG;
     global $CONFIG_DB;

@@ -25,7 +25,7 @@ require(INIT_PATH.'init.db.php');
     
     // UID값을 기준으로 원본 화일을 가져오고
     $uid = $_REQUEST['mapc_uid'];
-	$query = 'SELECT post_origin_type, post_origin_url FROM " . $CONFIG_DB['prefix'] . "mapc_post WHERE post_uid = "' . $uid . '"';
+	$query = 'SELECT post_origin_type, post_origin_url FROM ' . $CONFIG_DB['prefix'] . 'mapc_post WHERE post_uid = "' . $uid . '"';
 
 	$sth = $CONFIG_DB['handler']->prepare($query);
 	$sth->execute();

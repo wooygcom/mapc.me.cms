@@ -14,7 +14,7 @@ require(INIT_PATH.'init.db.php');
 
         // 권한체크
         include_once(MODULE_PATH . 'user/model/auth_check.func.php');
-        module_user_auth_check($_SESSION['mapc_user_uid'], '', 'scrap');
+        module_user_auth_check($_SESSION['mapc_user_uid'], 'scrap');
 
     } // BLOCK
 
@@ -192,7 +192,7 @@ require(INIT_PATH.'init.db.php');
                                     $thum_dir = $save_dir . 'thum/' . $dc_info->mapc_dir;
                                     if(! is_dir($thum_dir)) {
                                         $tmp_dir_name = (PHP_OS == 'WINNT') ? str_replace("/", "\\", $thum_dir) : $thum_dir;
-                                        mkdir($tmp_dir_name, 0777);
+                                        mkdir($tmp_dir_name, 0755, true);
                                         unset($tmp_dir_name);
                                     }
 
@@ -260,23 +260,52 @@ require(INIT_PATH.'init.db.php');
                     } elseif(is_file($each_file)) {
 
 						$tmp_array = array();
+						// 각 화일에서 /data/mapc/사용자아이디/original 부분을 뺀 나머지 부분에서 각각의 디렉토리이름을 저장 (나중에 "주제"에 넣을 것)
+						$tmp_subjects = explode("/", dirname( str_replace($save_dir."original/", "", $each_file) ) );
 
-                        // 디렉토리 위치와 환경설정에서의 위치가 동일 할 경우 미리 지정된 환경설정값을 불러온다.
+                        // 디렉토리 위치와 환경설정에서의 위치가 동일 할 경우 미리 지정된 환경설정값을 불러온다. (예:풍경/ 디렉토리에 있는 사진의 주제를 (환경설정에서 '풍경사진'으로 지정되어있을 경우) '풍경사진'으로 지정
                         if(is_array($CONFIG_MODL_MAPC['scrap'])) {
-                        
+
                             foreach($CONFIG_MODL_MAPC['scrap'] as $config_key => $config_var) {
-                                if(
-                                    strpos($each_file, $config_var['dir'])
-                                    !== false
-                                ) {
+
+                                if(strpos($each_file, $config_var['dir']) !== false) {
+
+									/**
+									 *  풍경/한국/산/ 이런 디렉토리 안에 있는 자료의 경우 각각의 디렉토리 이름이 주제가 되는데
+									 * 환경설정에 이미 어떤 값으로 넣을지 정해져 있다면 $tmp_subjects에서는 삭제
+									 */ 
+									foreach($tmp_subjects as $key_subject => $var_subject) {
+
+										if(strpos($config_var['dir'], $var_subject) !== false) {
+
+											unset($tmp_subjects[$key_subject]);
+
+										}
+
+									}
+
                                     unset($config_var['dir']);
-                                    $tmp_array = array_merge_recursive((array)$config_var, (array)$tmp_array);
+									$tmp_array = array_merge_recursive((array)$config_var,		(array)$tmp_array);
+
                                 }
+
                             }
+
+							foreach ($tmp_subjects as $key => $var) {
+
+								$subjects_final['dc_subject'][$key]    = $var;
+								$subjects_final['dc_subject_id'][$key] = 'NA';
+
+							}
+
+							$tmp_array = array_merge_recursive((array)$subjects_final,	(array)$tmp_array);
 
                         }
 
 						$arg['meta'] = $tmp_array;
+						unset($subjects_final);
+						unset($tmp_subjects);
+						unset($tmp_array);
 
                         // 파일 확장자
                         $tmp_extension = strtolower($file_info['extension']);

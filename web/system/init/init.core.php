@@ -39,4 +39,13 @@ $_POST = mapc_common_check_var($_POST);
 
 } // BLOCK
 
+/**
+ * 언어 설정
+ */
+{ // BLOCK:language_setup:20141110:언어설정
+
+	include_once(PROC_PATH . 'locale.proc.php');
+
+}
+
 // this is it

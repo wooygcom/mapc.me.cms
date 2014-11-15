@@ -20,11 +20,13 @@ post_etc = ''
 
 function module_mapc_post_update(&$uid, &$post_info, &$arg = array()) {
 
+	global $CONFIG_DB;
+
     // 새 글일 경우 "글쓴날"에 현재시간을 판올림일 경우 "편집일"에
     if($arg['is_new_post']) {
 
         $query = "
-            INSERT INTO mc_mapc_post
+            INSERT INTO " . $CONFIG_DB['prefix'] . "mapc_post
                 SET post_title      = :title
                   , post_lang       = :lang
                   , post_content    = :content
@@ -44,7 +46,7 @@ function module_mapc_post_update(&$uid, &$post_info, &$arg = array()) {
     } else {
 
         $query = "
-            UPDATE mc_mapc_post
+            UPDATE " . $CONFIG_DB['prefix'] . "mapc_post
                 SET post_title      = :title
                   , post_content    = :content
                   , post_edit_date_latest = :date 

@@ -12,7 +12,7 @@ require(INIT_PATH.'init.db.php');
 
         // 권한체크
         include_once(MODULE_PATH . 'user/model/auth_check.func.php');
-        $result = module_user_auth_check($_SESSION['mapc_user_uid'], '', 'scrap');
+        $result = module_user_auth_check($_SESSION['mapc_user_uid'], 'scrap');
 
 	} // BLOCK
 

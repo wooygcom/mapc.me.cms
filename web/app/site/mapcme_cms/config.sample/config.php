@@ -43,12 +43,13 @@ if(!defined('__MAPC__')) { exit(); }
 	$CONFIG['utc']		= date('P'); // UTC 시차 (+09:00 형태)
 	$CONFIG['email']	= '';       // 관리자 이메일
 	$CONFIG['layout']	= 'basic';	// 기본 레이아웃
+	$CONFIG['lang']	= 'kor';
 
     $CONFIG['admin']    = !empty($temp['admn']) ? $temp['admn'] : '';    // admin module
     $CONFIG['module']   = !empty($temp['modl']) ? $temp['modl'] : 'home';    // default module
     $CONFIG['module']   = !empty($temp['admn']) ? $temp['admn'] : $CONFIG['module'];    // admin에 값이 있을 경우 $CONFIG['module']은 admin값을 따름
     $CONFIG['page']     = !empty($temp['page']) ? $temp['page'] : 'dashboard';    // default page
-    $CONFIG['lang']     = !empty($temp['lang']) ? $temp['lang'] : 'kor';  // 기본언어
+    $CONFIG['locale']     = !empty($temp['locale']) ? $temp['locale'] : 'ko_KR';  // 기본언어
     $CONFIG['show']     = !empty($temp['show']) ? $temp['show'] : 'html'; // 기본화면출력 : html, html_emb(embed형식), html_cont(head,body태그 빼고 내용만 출력), xml, docbook, json
 	unset($temp);
 
@@ -63,26 +64,26 @@ if(!defined('__MAPC__')) { exit(); }
 	$CONFIG['meta']['copyright'] = _('[YOURSITEDOMAIN].com');
 	
 	// 키워드 지정
-	$CONFIG['meta']['keywords'] = _('Keywords');
+	$CONFIG['meta']['keywords'] = _('MAPC', '사이트 키워드1, 사이트 키워드2');
 	
 	// 사이트 주제(문장)
-	$CONFIG['meta']['subject'] = _('');
+	$CONFIG['meta']['subject'] = _('사이트 주제1');
 	
 	// 사이트 설명
-	$CONFIG['meta']['description'] = _('');
+	$CONFIG['meta']['description'] = _('사이트 설명');
 	
 	// 권한자
-	$CONFIG['meta']['author'] = _('');
+	$CONFIG['meta']['author'] = _('권한자');
 	
 	// 작성자
-	$CONFIG['meta']['writer'] = _('');
+	$CONFIG['meta']['writer'] = _('글쓴이');
 	
 	// 웹로봇 설정
-	$CONFIG['meta']['robots'] = _('all');
+	$CONFIG['meta']['robots'] = 'all';
 	
 	// 기본 언어
-	$CONFIG['meta']['content-language'] = _('ko');
-    
+	$CONFIG['meta']['content-language'] = 'ko';
+   
 } // BLOCK
 
 

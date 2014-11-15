@@ -102,7 +102,7 @@ require(INIT_PATH.'init.db.php');
             $mapc_page = $_REQUEST['mapc_page'] ? (int)$_REQUEST['mapc_page'] : 1;
             $page      = ($mapc_page - 1) * $pageSet;
 
-            $sth->bindParam(':page',    $page,    PDO::PARAM_INT);
+            $sth->bindParam(':page',      $page,    PDO::PARAM_INT);
             $sth->bindParam(':pageSet', $pageSet, PDO::PARAM_INT);
 
             // 검색값 넣기 #ID:ab9102312

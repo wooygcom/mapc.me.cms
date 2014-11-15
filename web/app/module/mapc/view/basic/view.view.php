@@ -105,28 +105,33 @@
 			?>
 		</ul>
 
-        <!-- shareaholic : h -->
-        <script type="text/javascript">
-        //<![CDATA[
-          (function() {
-            var shr = document.createElement('script');
-            shr.setAttribute('data-cfasync', 'false');
-            shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
-            shr.type = 'text/javascript'; shr.async = 'true';
-            shr.onload = shr.onreadystatechange = function() {
-              var rs = this.readyState;
-              if (rs && rs != 'complete' && rs != 'loaded') return;
-              var apikey = 'd9b084943e1d15fddb5c5ee670772f36';
-              try { Shareaholic.init(apikey); } catch (e) {}
-            };
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(shr, s);
-          })();
-        //]]>
-        </script>
-        <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='4649131'></div>
-        <!-- shareaholic : t -->
-
+		<?php
+			if(! $is_debug) {
+		?>
+	        <!-- shareaholic : h -->
+	        <script type="text/javascript">
+	        //<![CDATA[
+	          (function() {
+	            var shr = document.createElement('script');
+	            shr.setAttribute('data-cfasync', 'false');
+	            shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
+	            shr.type = 'text/javascript'; shr.async = 'true';
+	            shr.onload = shr.onreadystatechange = function() {
+	              var rs = this.readyState;
+	              if (rs && rs != 'complete' && rs != 'loaded') return;
+	              var apikey = 'd9b084943e1d15fddb5c5ee670772f36';
+	              try { Shareaholic.init(apikey); } catch (e) {}
+	            };
+	            var s = document.getElementsByTagName('script')[0];
+	            s.parentNode.insertBefore(shr, s);
+	          })();
+	        //]]>
+	        </script>
+	        <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='4649131'></div>
+	        <!-- shareaholic : t -->
+		<?php
+			}
+		?>
 	</article>
 
 </section>
