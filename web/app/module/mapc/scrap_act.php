@@ -117,9 +117,7 @@ require(INIT_PATH.'init.db.php');
                         foreach($dc_info as $tmp_dc_key => $tmp_dc_var) {
 
                             foreach($tmp_dc_var as $tmp_dc_key2 => $tmp_dc_var2) {
-// #TODO
-// 주제1, 주제2, 주제3에서 주제2에 ID가 없을때
-// 주제1[0]id1, 주제2[1]id1, 주제3[2](빈칸) 로 들어가는 버그
+
                                 $etc++;
                                 if(! empty($tmp_dc_var2->attributes()->xsi_type) ) {
                                     $dc_info->{$tmp_dc_key2.'_id'}[$etc] = (string)$tmp_dc_var2->attributes()->xsi_type;
