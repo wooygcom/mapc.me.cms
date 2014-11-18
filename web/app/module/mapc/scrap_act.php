@@ -104,8 +104,9 @@ require(INIT_PATH.'init.db.php');
                     unset($post_info);
                     unset($dc_info);
 
-                    $file_info = pathinfo($each_file);
-     
+					include_once(LIBRARY_PATH . 'mapc/pathinfo_utf.func.php');
+                    $file_info = mapc_pathinfo_utf($each_file);
+
                     // 화일에 딸린 rdf화일이 있을 경우
                     if(is_file($each_file . '.rdf')) {
 
@@ -347,6 +348,7 @@ require(INIT_PATH.'init.db.php');
                                 // 첫째줄을 제목으로
                                 $fp  = fopen($each_file, "r");
                                 $tmp = fgets($fp);
+
                                 $title = str_replace("\n", '', $tmp);
                                 fclose($fp);
                                 // date값은 화일 작성일을 입력
@@ -396,7 +398,7 @@ require(INIT_PATH.'init.db.php');
                             $arg['meta']['rdf_about']  = $file_info['basename'];
                             // 제목
                             $arg['meta']['dc_title'][] = $title;
-                            // 화일을 불러올때는 원본이 언어로 되어있는지 모르니 무조건 기본언어로 등록
+                            // 화일을 불러올때는 원본이 언어로 되어있는지 모르니 무조건 기본언어로 등록 // #TODO 어떤 언어로 되어있는지 조사해서 입력...
                             $arg['meta']['dc_lang'][]  = $CONFIG['lang'];
 							$arg['meta']['dc_modified'][] = date('Y-m-d H:i:s');
 

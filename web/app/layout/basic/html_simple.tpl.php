@@ -20,8 +20,7 @@ if($_SESSION['mapc_user_id']) {
             foreach($publish_data['headhook'] as $key => $var) {
                 include($var . $key);
             }
-        ?>
-        <?php
+
             if(is_array($publish_data['head']['css'])) {
 
                 foreach($publish_data['head']['css'] as $file => $dir) {
@@ -57,7 +56,7 @@ if($_SESSION['mapc_user_id']) {
     <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -66,7 +65,7 @@ if($_SESSION['mapc_user_id']) {
         </div>
         <div class="navbar-collapse collapse">
 
-<?= $publish_data['head']['menu']; ?>
+			<?= $publish_data['head']['menu']; ?>
 
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="<?= $sign_inout_url; ?>"><?= $sign_inout_title; ?></a></li>

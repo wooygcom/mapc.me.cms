@@ -13,6 +13,7 @@ require(INIT_PATH.'init.db.php');
 
     { // BLOCK:post_get:20131023:글 정보 가져오기
 
+    	// $post_info, $postmeta_info 가져오기
         $arg['mapc_lang'] = $_REQUEST['mapc_lang'] ? $_REQUEST['mapc_lang'] : $CONFIG['lang'];
         include_once($PATH['mapc']['root'] . 'model/post_get.proc.php');
 

@@ -20,8 +20,7 @@ if($_SESSION['mapc_user_id']) {
             foreach($publish_data['headhook'] as $key => $var) {
                 include($var . $key);
             }
-        ?>
-        <?php
+
             if(is_array($publish_data['head']['css'])) {
 
                 foreach($publish_data['head']['css'] as $file => $dir) {

@@ -35,11 +35,12 @@ function module_mapc_convert_file($type, $origin_file, &$content, $option = arra
 			$path_info = $tmp_file['dirname'];
             $path_info = str_replace('/original/', '/thum/', $path_info);
 
+			$md_content = file_get_contents($origin_file);
 			// 마크다운 변환 : $content_html = Parsedown::instance()->parse($content);
             require_once LIBRARY_PATH . 'parsedown/Parsedown.php';
             $parse = new Parsedown;
             $parse->setImagePath($path_info . '/');
-            $content_html = $parse->parse($content);
+            $content_html = $parse->parse($md_content);
 
             echo $content_html;
             break;
