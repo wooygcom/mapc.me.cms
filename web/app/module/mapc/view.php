@@ -65,20 +65,41 @@ require(INIT_PATH.'init.db.php');
 
     } // BLOCK
 
-    { // BLOCK:get_another_lang:20131230:덧붙임2. 이 글을 연결하고 있는 다른 글들
+    if(in_array('BGHWTSPXA18Y3KF7QLC6', $postmeta_info['dc_subject_id']))
+    { // BLOCK:get_another_lang:20131230:덧붙임2. 주제가  홀로이름씨(영화이름, 책이름 따위)일 경우 이 글을 연결하고 있는 다른 글들
 
         $query = "
-            select postmeta_lang, postmeta_value
-              from " . $CONFIG_DB['prefix'] . "mapc_postmeta
-             where postmeta_key = 'dc_subject'
-               and postmeta_post_uid = ?
+			SELECT post_uid, post_title FROM dbname.mc_mapc_post where post_uid IN (
+			            select postmeta_post_uid
+			              from " . $CONFIG_DB['prefix'] . "mapc_postmeta
+			             where postmeta_key = 'dc_subject_id'
+			               and postmeta_value = ?
+			)
+			and post_lang = ?
             ";
         $sth = $CONFIG_DB['handler']->prepare($query);
-        $sth->execute(array($arg['mapc_uid']));
-        $title_TEMP = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $sth->execute(array($arg['mapc_uid'], $arg['mapc_lang']));
+        $title_same_subject = $sth->fetchAll(PDO::FETCH_ASSOC);
 
     } // BLOCK
-    
+
+    { // BLOCK:get_another_lang:20131230:덧붙임3. 이 글과 같은 주제의 글 리스트 보기
+
+        $so_query = "
+            SELECT distinct postmeta_key, postmeta_value
+              FROM " . $CONFIG_DB['prefix'] . "mapc_postmeta
+             WHERE postmeta_key = :search_key
+            ";
+
+        $so_sth = $CONFIG_DB['handler']->prepare($so_query);
+
+        $so_search_key = 'dc_subject';
+        $so_sth->bindParam(':search_key', $so_search_key, PDO::PARAM_STR);
+        $so_sth->execute();
+        $so_rlt['dc_subject'] = $so_sth->fetchAll(PDO::FETCH_ASSOC);
+
+    } // BLOCK
+
     { // BLOCK:get_data:2012081701:읽으려는 파일의 종류, 파일 위치 가져오기
 
         include($PATH['mapc']['root'] . 'model/convert_file.func.php');

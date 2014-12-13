@@ -3,34 +3,64 @@
 
 	$MENU = isset($MENU) ? $MENU : array();
 
-	$MENU['_default_submenu'] = 'mainmenu1';
+	$MENU['_default_submenu'] = 'mapc';
 
-    $MENU['sitemap']['mainmenu1']['_title']  = '메인메뉴1';
-    $MENU['sitemap']['mainmenu1']['_link']   = '';
-    $MENU['sitemap']['mainmenu1']['_key']    = 'mainmenu1';
-    $MENU['sitemap']['mainmenu1']['_sub']['menu1']['_title'] = '메뉴1';
-    $MENU['sitemap']['mainmenu1']['_sub']['menu1']['_link']  = '#';
-    $MENU['sitemap']['mainmenu1']['_sub']['menu2']['_title'] = '메뉴2';
-    $MENU['sitemap']['mainmenu1']['_sub']['menu2']['_link']  = '#';
-    $MENU['sitemap']['mainmenu1']['_sub']['menu3']['_title'] = '메뉴3';
-    $MENU['sitemap']['mainmenu1']['_sub']['menu3']['_link']  = '#';
+    $MENU['sitemap']['mapc']['_title']  = '맵시';
+    $MENU['sitemap']['mapc']['_link']   = $URL['core']['root'] . '?core_modl=mapc&core_page=list';
+    $MENU['sitemap']['mapc']['_key']    = 'mapc';
 
-    $MENU['sitemap']['mainmenu2']['_title']  = '메인메뉴2';
-    $MENU['sitemap']['mainmenu2']['_link']   = '';
-    $MENU['sitemap']['mainmenu2']['_key']    = 'mainmenu2';
-    $MENU['sitemap']['mainmenu2']['_sub']['menu1']['_title'] = '메뉴1';
-    $MENU['sitemap']['mainmenu2']['_sub']['menu1']['_link']  = '#';
-    $MENU['sitemap']['mainmenu2']['_sub']['menu2']['_title'] = '메뉴2';
-    $MENU['sitemap']['mainmenu2']['_sub']['menu2']['_link']  = '#';
+    {
+        $MENU['sitemap']['mapc']['_sub']['list']['_title'] = '리스트';
+        $MENU['sitemap']['mapc']['_sub']['list']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=list';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['album']['_title'] = '앨범(추천)';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['album']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=list&mapc_cate=image';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['album']['_sub']['animal']['_title'] = '동물';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['album']['_sub']['animal']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=list&mapc_cate=image&mapc_search[]=dc_subject:반려동물';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['album']['_sub']['satire']['_title'] = '풍자';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['album']['_sub']['satire']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=list&mapc_cate=image&mapc_search[]=dc_subject:풍자';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['calendar']['_title'] = '달력';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['calendar']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=list&mapc_cate=date';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['calendar']['_sub']['diary']['_title'] = '날적이';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['calendar']['_sub']['diary']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=list&mapc_cate=date&mapc_search[]=dc_type:날적이';
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['tag']['_title'] = '꼬리표'; // 꼬리표 리스트
+        $MENU['sitemap']['mapc']['_sub']['list']['_sub']['tag']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=list&mapc_cate=tag';
 
-    // #TODO 관리자 메뉴 링크 추가하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    $MENU['admin']['main']['_title'] = '관리';
-    $MENU['admin']['main']['_link']  = '#';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_title'] = '글쓰기/편집';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=edit';
+    // #TODO 개인별로 글쓰기 종류 설정가능하도록!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['memo']['_title'] = '적바림';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['memo']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=edit&mapc_cate_edit=memo';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['diary']['_title'] = '날적이';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['diary']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=edit&mapc_cate_edit=diary';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['proverb']['_title'] = '좋은글';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['proverb']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=edit&mapc_cate_edit=proverb';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['satire']['_title'] = '풍자';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['satire']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=edit&mapc_cate_edit=satire';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['word']['_title'] = '이름씨';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['word']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=edit&mapc_cate_edit=word';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['animal_picture']['_title'] = '반려동물';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['animal_picture']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=edit&mapc_cate_edit=animal_picture';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['landscape_picture']['_title'] = '풍경';
+        $MENU['sitemap']['mapc']['_sub']['edit']['_sub']['landscape_picture']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=edit&mapc_cate_edit=landscape_picture';
 
-    $MENU['admin']['user']['_title'] = '사용자';
-    $MENU['admin']['user']['_link']  = '#';
-    $MENU['admin']['user']['_sub']['_title'] = '사용자리스트';
-    $MENU['admin']['user']['_sub']['_link']  = '#';
+        $MENU['sitemap']['mapc']['_sub']['special']['_title'] = '특수기능';
+        $MENU['sitemap']['mapc']['_sub']['special']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=scrap';
+        $MENU['sitemap']['mapc']['_sub']['special']['_sub']['scrap']['_title'] = '긁어오기';
+        $MENU['sitemap']['mapc']['_sub']['special']['_sub']['scrap']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=scrap';
+        $MENU['sitemap']['mapc']['_sub']['special']['_sub']['edit_whole']['_title'] = '일괄편집';
+        $MENU['sitemap']['mapc']['_sub']['special']['_sub']['edit_whole']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=batch';
+    }
 
+
+    $MENU['sitemap']['mapc-shop']['_title']  = '쇼핑몰';
+    $MENU['sitemap']['mapc-shop']['_link']   = $URL['core']['root'] . '?core_modl=mapc-shop&core_page=list';
+    $MENU['sitemap']['mapc-shop']['_key']    = 'mapc';
+
+    {
+        $MENU['sitemap']['mapc-shop']['_sub']['list']['_title'] = '상품리스트';
+        $MENU['sitemap']['mapc-shop']['_sub']['list']['_link']  = $URL['core']['root'] . '?core_modl=mapc&core_page=list&mapc_cate=image';
+        $MENU['sitemap']['mapc-shop']['_sub']['cart']['_title'] = '장바구니';
+        $MENU['sitemap']['mapc-shop']['_sub']['cart']['_link']  = $URL['core']['root'] . '?core_modl=mapc-shop&core_page=cart';
+    }
 
 // this is it

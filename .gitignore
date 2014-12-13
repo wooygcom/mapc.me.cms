@@ -1,0 +1,7 @@
+﻿.gitignore
+.project
+.sync.ffs_db
+*.bak
+web/data/*
+web/temp/sess/*
+

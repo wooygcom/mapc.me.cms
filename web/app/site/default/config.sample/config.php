@@ -18,8 +18,6 @@ if(!defined('__MAPC__')) { exit(); }
 	$temp['admn'] = htmlspecialchars($_REQUEST['core_admn']);
 	// 페이지 지정하지 않았을 경우 기본 페이지
 	$temp['page'] = htmlspecialchars($_REQUEST['core_page']);
-	// 사용할 언어
-	$temp['lang'] = htmlspecialchars($_REQUEST['core_lang']);
 	// 기본 출력(html, json, etc...)
 	$temp['show'] = htmlspecialchars($_REQUEST['core_show']);
 
@@ -34,41 +32,65 @@ if(!defined('__MAPC__')) { exit(); }
 
 { // BLOCK:normar_config:20121202
 
+	/**
+	 * 기본 설정
+	 */
 	date_default_timezone_set('Asia/Seoul');	// 기본시간대
 
 	$CONFIG = array();
+
 	$CONFIG['encode']	= 'utf-8';	// 기본 인코딩, default encoding
 	$CONFIG['utc']		= date('P'); // UTC 시차 (+09:00 형태)
 	$CONFIG['email']	= '';       // 관리자 이메일
 	$CONFIG['layout']	= 'basic';	// 기본 레이아웃
+	$CONFIG['lang']	= 'kor';
 
     $CONFIG['admin']    = !empty($temp['admn']) ? $temp['admn'] : '';    // admin module
     $CONFIG['module']   = !empty($temp['modl']) ? $temp['modl'] : 'home';    // default module
     $CONFIG['module']   = !empty($temp['admn']) ? $temp['admn'] : $CONFIG['module'];    // admin에 값이 있을 경우 $CONFIG['module']은 admin값을 따름
     $CONFIG['page']     = !empty($temp['page']) ? $temp['page'] : 'dashboard';    // default page
-    $CONFIG['lang']     = !empty($temp['lang']) ? $temp['lang'] : 'kor';  // 기본언어
+    $CONFIG['locale']     = !empty($temp['locale']) ? $temp['locale'] : 'ko_KR';  // 기본언어
     $CONFIG['show']     = !empty($temp['show']) ? $temp['show'] : 'html'; // 기본화면출력 : html, html_emb(embed형식), html_cont(head,body태그 빼고 내용만 출력), xml, docbook, json
-
 	unset($temp);
 
+	/**
+	 * 메타데이터 설정
+	 */
+
+	// 사이트 제목 지정
+	$CONFIG['meta']['title'] = _('사이트 제목');
+	
+	// 저작권자 지정
+	$CONFIG['meta']['copyright'] = _('[YOURSITEDOMAIN].com');
+	
+	// 키워드 지정
+	$CONFIG['meta']['keywords'] = _('MAPC', '사이트 키워드1, 사이트 키워드2');
+	
+	// 사이트 주제(문장)
+	$CONFIG['meta']['subject'] = _('사이트 주제1');
+	
+	// 사이트 설명
+	$CONFIG['meta']['description'] = _('사이트 설명');
+	
+	// 권한자
+	$CONFIG['meta']['author'] = _('권한자');
+	
+	// 작성자
+	$CONFIG['meta']['writer'] = _('글쓴이');
+	
+	// 웹로봇 설정
+	$CONFIG['meta']['robots'] = 'all';
+	
+	// 기본 언어
+	$CONFIG['meta']['content-language'] = 'ko';
+   
 } // BLOCK
 
 
 /**
- * 메타데이터 지정
- */
-{ // BLOCK:meta_data:20131209:메타데이터 지정
-
-    // $CONFIG['meta'] 값 가져오기
-    include(CONFIG_PATH . 'meta.lang_' . $CONFIG['lang'] . '.php');
-
-} // BLOCK
-
-
-/**
+ *
  * 보안관련 설정
  * 
- * 고정값으로 사용자에 의한 변경 불가능
  */
  
 { // BLOCK:secret_config:20130104:템플릿으로 출력되기 직전 삭제할 환경설정

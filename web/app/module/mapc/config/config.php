@@ -40,11 +40,17 @@ $URL['mapc']['file_view']= $URL['mapc']['root'] . '&core_page=file';
     $CONFIG_MODL_MAPC['edit']['word']['postmeta_info']['dc_type_id'][0] = 'XHVYMN287ZSTF4JWUPQA';
     $CONFIG_MODL_MAPC['edit']['word']['publish_check_option']['mapc_make_file__uid'] = true;
 
-    // memo : 적바리
+    // memo : 적바림
     $CONFIG_MODL_MAPC['edit']['memo']['post_info']['post_origin_type']  = 'text/markdown';
     $CONFIG_MODL_MAPC['edit']['memo']['postmeta_info']['mapc_dir'][0]   = '적바림/';
     $CONFIG_MODL_MAPC['edit']['memo']['postmeta_info']['dc_type'][0]    = '적바림';
     $CONFIG_MODL_MAPC['edit']['memo']['postmeta_info']['dc_type_id'][0] = 'N3A2HX9FEWTGC6Q78KMV';
+
+    // quiz : 퀴즈
+    $CONFIG_MODL_MAPC['edit']['quiz']['post_info']['post_origin_type']  = 'text/markdown';
+    $CONFIG_MODL_MAPC['edit']['quiz']['postmeta_info']['mapc_dir'][0]   = '퀴즈/';
+    $CONFIG_MODL_MAPC['edit']['quiz']['postmeta_info']['dc_subject'][0]    = '퀴즈';
+    $CONFIG_MODL_MAPC['edit']['quiz']['postmeta_info']['dc_subject_id'][0] = 'SUQPCELTYB1K7MA326F4';
 
     // diary
     $CONFIG_MODL_MAPC['edit']['diary']['post_info']['post_origin_type']     = 'text/markdown';
