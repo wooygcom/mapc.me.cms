@@ -45,21 +45,21 @@
 
 		<!-- 연결 : H -->
 		<p>
-			[ <a href="<?= $URL['mapc']['edit']; ?>&mapc_uid=<?= $post_info['post_uid']; ?>&mapc_lang=<?= $post_info['post_lang']; ?>">편집</a>
-			/ <a href="<?= $URL['mapc']['del']; ?>&mapc_uid=<?= $post_info['post_uid']; ?>&mapc_lang=<?= $post_info['post_lang']; ?>">삭제</a> ]
+			[ <a href="<?= $URL['mapc']['edit']; ?>mapc_uid/<?= $post_info['post_uid']; ?>/mapc_lang/<?= $post_info['post_lang']; ?>">편집</a>
+			/ <a href="<?= $URL['mapc']['del']; ?>mapc_uid/<?= $post_info['post_uid']; ?>/mapc_lang/<?= $post_info['post_lang']; ?>">삭제</a> ]
 			[
 			<?php
 		    	$sep = '';
 			    if($view_prev[0]) {
 			?>
-			<a href="<?= $URL['mapc']['view']; ?>&mapc_uid=<?= $view_prev[0]; ?>&mapc_lang=<?= $post_info['post_lang']; ?>">이전글</a>
+			<a href="<?= $URL['mapc']['view']; ?>mapc_uid/<?= $view_prev[0]; ?>/mapc_lang/<?= $post_info['post_lang']; ?>">이전글</a>
 			<?php
 					$sep = '/';
 			    }
 			    if($view_next[0]) {
 			    	echo $sep;
 			?>
-			<a href="<?= $URL['mapc']['view']; ?>&mapc_uid=<?= $view_next[0]; ?>&mapc_lang=<?= $post_info['post_lang']; ?>">다음글</a>
+			<a href="<?= $URL['mapc']['view']; ?>mapc_uid/<?= $view_next[0]; ?>/mapc_lang/<?= $post_info['post_lang']; ?>">다음글</a>
 			<?php
 			    }
 			?>
@@ -83,7 +83,7 @@
 		                $temp_sep = '';
 		                // 다른 언어로 된 똑같은 글 리스트 보기
 		                foreach($title_another_lang as $var) {
-		                    echo $temp_sep . ' <a href="' . $URL['mapc']['view'] . '&mapc_uid=' . $post_info['post_uid'] . '&mapc_lang=' . $var['postmeta_lang'] . '">'
+		                    echo $temp_sep . ' <a href="' . $URL['mapc']['view'] . 'mapc_uid/' . $post_info['post_uid'] . '/mapc_lang/' . $var['postmeta_lang'] . '">'
 		                        . '[' . $var['postmeta_lang'] . '] ' . $var['postmeta_value']
 		                        . '</a>';
 		                    $temp_sep = ', ';
@@ -106,7 +106,7 @@
 		                $temp_sep = '';
 		                // 다른 언어로 된 똑같은 글 리스트 보기
 		                foreach($title_same_subject as $var) {
-		                    echo $temp_sep . ' <a href="' . $URL['mapc']['view'] . '&mapc_uid=' . $var['post_uid'] . '&mapc_lang=' . $var['post_lang'] . '">'
+		                    echo $temp_sep . ' <a href="' . $URL['mapc']['view'] . 'mapc_uid/' . $var['post_uid'] . '/mapc_lang/' . $var['post_lang'] . '">'
 		                        . $var['post_title']
 		                        . '</a>';
 		                    $temp_sep = ', ';

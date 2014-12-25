@@ -6,9 +6,9 @@
 	{ // BLOCK:arg_check:2012081701:넘어온 값 점검
 
 		// 글의 고유값, Unique ID of article
-		$arg['mapc_uid']  = $arg['mapc_uid']  ? $arg['mapc_uid'] : $_REQUEST['mapc_uid'];
+		$arg['mapc_uid']  = $arg['mapc_uid']  ? $arg['mapc_uid'] : $ARGS['mapc_uid'];
 		// 언어
-		$arg['mapc_lang'] = $arg['mapc_lang'] ? $arg['mapc_lang'] : $_REQUEST['mapc_lang'];
+		$arg['mapc_lang'] = $arg['mapc_lang'] ? $arg['mapc_lang'] : $ARGS['mapc_lang'];
 
 	} // BLOCK
 

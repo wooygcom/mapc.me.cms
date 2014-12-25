@@ -5,13 +5,13 @@ if(count($post_list) > 0) {
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<a href="<?= $URL['mapc']['view']; ?>&mapc_uid=<?= $var['post_uid']; ?><?= $url_search_addition; ?>&mapc_lang=<?= $var['post_lang']; ?>"><?= $var['post_title']; ?></a> / <?= $var['file_type']; ?> / <?= $var['post_write_date']; ?>
+		<a href="<?= $URL['mapc']['view']; ?>mapc_uid/<?= $var['post_uid']; ?>/<?= $url_search_addition; ?>/mapc_lang/<?= $var['post_lang']; ?>"><?= $var['post_title']; ?></a> / <?= $var['file_type']; ?> / <?= $var['post_write_date']; ?>
 	</div>
 	<div class="panel-body">
 		<?=
             nl2br(mb_strimwidth(htmlspecialchars(
             $var['post_content']), 0, 255,
-            '... <a href="' . $URL['mapc']['view'] . '&mapc_uid=' . $var['post_uid'] . $url_search_addition . '">더보기</a>',
+            '... <a href="' . $URL['mapc']['view'] . 'mapc_uid/' . $var['post_uid'] . '/' . $url_search_addition . '">더보기</a>',
             $CONFIG['encode']));
         ?>
 	</div>

@@ -10,15 +10,15 @@ $PATH['mapc']['root'] = MODULE_PATH . 'mapc/';
 $PATH['mapc']['view'] = MODULE_PATH . 'mapc/view/';
 $PATH['mapc']['data'] = DATA_PATH . 'mapc/';
 
-$URL['mapc']['root']     = $URL['core']['root'] . '?core_modl=mapc';
-$URL['mapc']['edit']     = $URL['mapc']['root'] . '&core_page=edit';
-$URL['mapc']['edit_act'] = $URL['mapc']['root'] . '&core_page=edit_act';
-$URL['mapc']['del']      = $URL['mapc']['root'] . '&core_page=del';
-$URL['mapc']['view']     = $URL['mapc']['root'] . '&core_page=view';
-$URL['mapc']['list']     = $URL['mapc']['root'] . '&core_page=list';
-$URL['mapc']['scrap']    = $URL['mapc']['root'] . '&core_page=scrap';
-$URL['mapc']['scrap_act']= $URL['mapc']['root'] . '&core_page=scrap_act';
-$URL['mapc']['file_view']= $URL['mapc']['root'] . '&core_page=file';
+$URL['mapc']['root']     = $URL['core']['root'] . 'mapc/';
+$URL['mapc']['edit']     = $URL['mapc']['root'] . 'edit/';
+$URL['mapc']['edit_act'] = $URL['mapc']['root'] . 'edit_act/';
+$URL['mapc']['del']      = $URL['mapc']['root'] . 'del/';
+$URL['mapc']['view']     = $URL['mapc']['root'] . 'view/';
+$URL['mapc']['list']     = $URL['mapc']['root'] . 'list/';
+$URL['mapc']['scrap']    = $URL['mapc']['root'] . 'scrap/';
+$URL['mapc']['scrap_act']= $URL['mapc']['root'] . 'scrap_act/';
+$URL['mapc']['file_view']= $URL['mapc']['root'] . 'file/';
 
 /**
  * 모듈 환경설정

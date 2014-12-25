@@ -14,7 +14,7 @@ require(INIT_PATH.'init.db.php');
     { // BLOCK:post_get:20131023:글 정보 가져오기
 
     	// $post_info, $postmeta_info 가져오기
-        $arg['mapc_lang'] = $_REQUEST['mapc_lang'] ? $_REQUEST['mapc_lang'] : $CONFIG['lang'];
+        $arg['mapc_lang'] = $ARGS['mapc_lang'] ? $ARGS['mapc_lang'] : $CONFIG['lang'];
         include_once($PATH['mapc']['root'] . 'model/post_get.proc.php');
 
     } // BLOCK
@@ -124,7 +124,7 @@ require(INIT_PATH.'init.db.php');
         // #TODO 사이트 기본이미지
     }
     // #TODO mod_rewrite에서 /module/page/[글번호] 가져올 수 있게끔 처리!!!
-    $publish_data['head']['meta']['url']         = $URL['mapc']['view'] . '&mapc_uid=' . $arg['mapc_uid'];
+    $publish_data['head']['meta']['url']         = $URL['mapc']['view'] . 'mapc_uid/' . $ARGS['mapc_uid'] . '/';
     $publish_data['head']['meta']['description'] = $postmeta_info['dc_description'][0];
     $publish_data['head']['meta']['keywords']    = (is_array($postmeta_info['dc_subject'])) ? implode(",", $postmeta_info['dc_subject']) : '';
 

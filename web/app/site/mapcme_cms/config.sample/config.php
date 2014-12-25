@@ -2,40 +2,16 @@
 if(!defined('__MAPC__')) { exit(); }
 
 /**
- * 사용자 입력값 및 기본값 설정
- */
-
-{ // BLOCK:argument_arrange:2012080901:사용자 입력값 (또는 GET값 중 필요한 부분) 처리(환경 설정에서 필요한 부분은 사용하고 나머지는 버림)
-
-	error_reporting(0);	// 에러출력
-
-    $temp = array();
-
-	// $_REQUEST['core_modl']
-	// 기본으로 사용할 모듈(선택)
-	$temp['modl'] = htmlspecialchars($_REQUEST['core_modl']);
-	// 관리자 모듈(선택)
-	$temp['admn'] = htmlspecialchars($_REQUEST['core_admn']);
-	// 페이지 지정하지 않았을 경우 기본 페이지
-	$temp['page'] = htmlspecialchars($_REQUEST['core_page']);
-	// 기본 출력(html, json, etc...)
-	$temp['show'] = htmlspecialchars($_REQUEST['core_show']);
-
-} // BLOCK
-
-
-/**
  * 일반설정
- * 
- * 사용자에 의해 변경가능한 값
  */
 
-{ // BLOCK:normar_config:20121202
+{ // BLOCK:normar_config:20121202:기본 환경설정
 
 	/**
 	 * 기본 설정
 	 */
 	date_default_timezone_set('Asia/Seoul');	// 기본시간대
+	error_reporting(0);	// 에러출력
 
 	$CONFIG = array();
 
@@ -45,13 +21,37 @@ if(!defined('__MAPC__')) { exit(); }
 	$CONFIG['layout']	= 'basic';	// 기본 레이아웃
 	$CONFIG['lang']	= 'kor';
 
-    $CONFIG['admin']    = !empty($temp['admn']) ? $temp['admn'] : '';    // admin module
+	$CONFIG['root_url']	= '/wygoing/mapc.me.cms/web/app/';	// 웹에서 접근할 때의 ROOT 주소
+
+} // BLOCK
+
+{ // BLOCK:args:20141219:사용자의 넘김값(argument)에 의해 바뀔 수 있는 값
+
+	$temp['args'] = explode("/", str_replace($CONFIG['root_url'], '', ltrim($_SERVER['PATH_INFO'])));	// argument들이 arg1/arg2/arg3 처럼 값이 넘어옴
+
+	$temp['modl'] = $temp['args'][0];
+	$temp['page'] = $temp['args'][1];
+
+	$count_args = (count($temp['args']));
+
+	// mod_rewrite로 /foo1/var1/foo2/var2/foo3/var3 과 같은 형태로 넘어온 값을 $ARGS['foo1'] = 'var1'; 형태로 변경
+	for($i=2; $i < $count_args; $i += 2) {
+
+		$ARGS[$temp['args'][$i]] = $temp['args'][$i+1];
+
+	}
+
+    $CONFIG['admin']    = !empty($temp['admn']) ? $temp['admn'] : '';    // default admin module
     $CONFIG['module']   = !empty($temp['modl']) ? $temp['modl'] : 'home';    // default module
-    $CONFIG['module']   = !empty($temp['admn']) ? $temp['admn'] : $CONFIG['module'];    // admin에 값이 있을 경우 $CONFIG['module']은 admin값을 따름
+    $CONFIG['module']   = !empty($temp['admn']) ? $temp['admn'] : $CONFIG['module'];    // default admin값이 있을 경우 $CONFIG['module']은 admin값을 따름
     $CONFIG['page']     = !empty($temp['page']) ? $temp['page'] : 'dashboard';    // default page
     $CONFIG['locale']     = !empty($temp['locale']) ? $temp['locale'] : 'ko_KR';  // 기본언어
     $CONFIG['show']     = !empty($temp['show']) ? $temp['show'] : 'html'; // 기본화면출력 : html, html_emb(embed형식), html_cont(head,body태그 빼고 내용만 출력), xml, docbook, json
 	unset($temp);
+
+} // BLOCK
+
+{ // BLOCK:meta:20141219:메타데이터
 
 	/**
 	 * 메타데이터 설정
@@ -59,31 +59,23 @@ if(!defined('__MAPC__')) { exit(); }
 
 	// 사이트 제목 지정
 	$CONFIG['meta']['title'] = _('사이트 제목');
-	
 	// 저작권자 지정
 	$CONFIG['meta']['copyright'] = _('[YOURSITEDOMAIN].com');
-	
 	// 키워드 지정
 	$CONFIG['meta']['keywords'] = _('MAPC', '사이트 키워드1, 사이트 키워드2');
-	
 	// 사이트 주제(문장)
 	$CONFIG['meta']['subject'] = _('사이트 주제1');
-	
 	// 사이트 설명
 	$CONFIG['meta']['description'] = _('사이트 설명');
-	
 	// 권한자
 	$CONFIG['meta']['author'] = _('권한자');
-	
 	// 작성자
 	$CONFIG['meta']['writer'] = _('글쓴이');
-	
 	// 웹로봇 설정
 	$CONFIG['meta']['robots'] = 'all';
-	
 	// 기본 언어
 	$CONFIG['meta']['content-language'] = 'ko';
-   
+
 } // BLOCK
 
 
@@ -125,9 +117,12 @@ if(!defined('__MAPC__')) { exit(); }
 
 	$URL = array();
 	// ROOT (상대주소를 사용할 경우에는 빈칸 또는 ./, 절대 주소를 사용할때는 웹상의URL을 적는다)
-	$URL['core']['root'] = eregi_replace("\/[^/]*\.php$", "/", $_SERVER['PHP_SELF']);
+// #TODO 아래와 같은 형태로 서버환경이 바뀌거나 프로그램 디렉토리를 옮기더라도 config에서 $URL['core']['root'] 를 수정할 필요없게끔... (rewrite 모듈을 사용하면 아래처럼 사용하는게 안먹힘)
+//	$URL['core']['root'] = eregi_replace("\/[^/]*\.php$", "/", $_SERVER['PHP_SELF']);
+	$URL['core']['root'] = $CONFIG['root_url'];
+
 	// 기본페이지 (기본페이지?변수1=값1&변수2=값2 와 같은 형태로 호출됨)
-	$URL['core']['main'] = $URL['core']['root'] . 'index.php';
+	$URL['core']['main'] = $URL['core']['root'];
 	$URL['core']['site'] = $URL['core']['root'] . 'site/' . SITE_CODE . '/';
 	$URL['core']['skin'] = $URL['core']['site'] . 'view/';
 

@@ -11,6 +11,7 @@ define('__MAPC__', true);
 	define('SITE_CODE', 'mapcme_cms');
 
 	$SITE_FILE = 'site.' . SITE_CODE . '.php';
+	define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] . '/wygoing/mapc.me.cms/web/');
 
 	if(is_file($SITE_FILE)) {
 
@@ -40,6 +41,7 @@ define('__MAPC__', true);
 
 	} else if($CONFIG['module'] == 'home') {
 
+        $publish_data['layout_path'] = LAYOUT_PATH . $CONFIG['layout'] . '/html_simple.tpl.php';
 		include_once( SITE_PATH . $CONFIG['page'] . '.php' );
 
 	} else {

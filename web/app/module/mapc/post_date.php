@@ -3,7 +3,7 @@
  *
  * 글의 UID 가져오기
  *
- * @param string  $_REQUEST['mapc_search_key']  검색하려는 글의 제목
+ * @param string  $ARGS['mapc_search_key']  검색하려는 글의 제목
  *
  */
 
@@ -13,16 +13,16 @@ require(INIT_PATH.'init.db.php');
     { // BLOCK:search_query:20140101:입력값 체크
 
         // 출력 키워드(리스트, 앨범, 달력, 꼬리표(태그)리스트...)
-        $mapc_cate   = $_REQUEST['mapc_cate'];
+        $mapc_cate   = $ARGS['mapc_cate'];
 
         // 검색 옵션
-        $mapc_srch_title = $_REQUEST['mapc_srch_title'];
-        $mapc_search_key = $_REQUEST['mapc_search_key'];
-        $mapc_search     = $_REQUEST['mapc_search'];
-        $mapc_srch_lang  = $_REQUEST['mapc_srch_lang'];
+        $mapc_srch_title = $ARGS['mapc_srch_title'];
+        $mapc_search_key = $ARGS['mapc_search_key'];
+        $mapc_search     = $ARGS['mapc_search'];
+        $mapc_srch_lang  = $ARGS['mapc_srch_lang'];
 
-        $mapc_date_from  = $_REQUEST['mapc_date_from'];
-        $mapc_date_to    = $_REQUEST['mapc_date_to'];
+        $mapc_date_from  = $ARGS['mapc_date_from'];
+        $mapc_date_to    = $ARGS['mapc_date_to'];
 
     } // BLOCK
 
@@ -33,8 +33,8 @@ require(INIT_PATH.'init.db.php');
 
     } // BLOCK
 
-    $date_start = date('Y-m-d', $_REQUEST['start']);
-    $date_end   = date('Y-m-d', $_REQUEST['end']);
+    $date_start = date('Y-m-d', $ARGS['start']);
+    $date_end   = date('Y-m-d', $ARGS['end']);
 
     $query = 'SELECT post_uid, post_lang, post_title, post_write_date FROM ' . $CONFIG_DB['prefix'] . 'mapc_post WHERE post_write_date between :mapc_date_start and :mapc_date_end ' . $search_query;
 

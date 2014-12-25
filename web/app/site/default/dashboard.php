@@ -9,8 +9,10 @@ require(INIT_PATH . 'init.core.php');
 
 { // View : Start
 
-	$section_file = $PATH['core']['skin'] . 'basic/dashboard.view.php';
-	include_once(PROC_PATH . 'publish.proc.php');
+    $section_file = $PATH['core']['skin'] . 'basic/dashboard.view.php';
+    $view['dashboard']['message']       = 'Hello, world';
+    $view['dashboard']['message_link']  = 'http://wooyg.com/';
+    include_once(PROC_PATH . 'publish.proc.php');
 
 } // View : Finish
 

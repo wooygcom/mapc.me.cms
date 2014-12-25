@@ -1,16 +1,10 @@
 <?php
 if(!defined('__MAPC__')) { exit(); }
 
-/**
- * 경로지정
- */
-
 { // BLOCK:path_set:2012080901:경로지정
 
 	// 기본디렉토리, 아래의 디렉토리 위치를 다른 곳으로 변경할 경우 이 값을 변경해줘야 함
 	// 디렉토리를 지정할 때는 언제나 뒷부분에 /(슬래시)를 붙여야 합니다. (dir1/(O), dir2(X))
-	define('ROOT_PATH', '../');
-
 	define('APP_PATH',  ROOT_PATH.'app/');		// 애플리케이션(프로그램 모음) 디렉토리, Application Directory
         // #TODO admin_abcd처럼 뒷 네자리는 보안을 위해 임의의 값으로 지정 (설치할 때 지정할 수 있게)
 		define('ADMIN_PATH',  APP_PATH . 'admin_skaq/');	// 관리자 프로그램 모음, Admin Directory

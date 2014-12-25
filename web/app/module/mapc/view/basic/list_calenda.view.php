@@ -24,7 +24,7 @@ $search_d = $tmp[2];
                 right: ''
 			},
 			editable: true,
-            events: '<?= $URL['mapc']['root']; ?>&core_page=post_date<?= $url_search_addition; ?>'
+            events: '<?= $URL['mapc']['root']; ?>core_page/post_date/<?= $url_search_addition; ?>'
 
 		});
         $('#calendar').fullCalendar('gotoDate', '<?= $search_y; ?>', '<?= $search_m - 1; ?>', '<?= $search_d; ?>');

@@ -19,7 +19,7 @@ function module_mapc_convert_file($type, $origin_file, &$content, $option = arra
             $file_thum = str_replace('/original/', '/thum/', $origin_file);
             $file_url = is_file($file_thum) ? $file_thum : $origin_file;
 
-            echo '<a href="' . $URL['mapc']['file_view'] . '&mapc_uid=' . $option['post_uid'] . '"><img src="' . $file_url . '" style="width:100%;" /></a>';
+            echo '<a href="' . $URL['mapc']['file_view'] . 'mapc_uid/' . $option['post_uid'] . '"><img src="' . $file_url . '" style="width:100%;" /></a>';
             echo '<p>' . $content . '</p>';
             break;
 

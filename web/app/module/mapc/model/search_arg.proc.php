@@ -7,18 +7,18 @@
 { // BLOCK:arg_search:20131123:검색관련 넘김값 만들기
 
     $url_search_addition = '';
-    $url_search_addition.= '&mapc_srch_title=' . $mapc_srch_title;
-    $url_search_addition.= '&mapc_search_key=' . $mapc_search_key;
-    $url_search_addition.= '&mapc_date_from='  . $mapc_date_from;
-    $url_search_addition.= '&mapc_date_to='    . $mapc_date_to;
-    $url_search_addition.= '&mapc_cate='       . $mapc_cate;
-    $url_search_addition.= '&mapc_srch_lang='  . $mapc_srch_lang;
+    $url_search_addition.= 'mapc_srch_title/' . $mapc_srch_title . '/';
+    $url_search_addition.= 'mapc_search_key/' . $mapc_search_key . '/';
+    $url_search_addition.= 'mapc_date_from/'  . $mapc_date_from . '/';
+    $url_search_addition.= 'mapc_date_to/'    . $mapc_date_to . '/';
+    $url_search_addition.= 'mapc_cate/'       . $mapc_cate . '/';
+    $url_search_addition.= 'mapc_srch_lang/'  . $mapc_srch_lang . '/';
 
     $key = $var = '';
 
     if(! empty($mapc_search)) {
         foreach($mapc_search as $key => $var) {
-            $url_search_addition .= '&mapc_search[]=' . $var;
+            $url_search_addition .= 'mapc_search[]/' . $var . '/';
         }
     }
 

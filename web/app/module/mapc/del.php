@@ -18,8 +18,8 @@ require(INIT_PATH.'init.db.php');
 
 	{ // BLOCK:arg_get:20131111:넘김값 정리
 
-		$mapc_uid  = $_REQUEST['mapc_uid'];
-        $mapc_lang = $_REQUEST['mapc_lang'] ? $_REQUEST['mapc_lang'] : $CONFIG['lang'];
+		$mapc_uid  = $ARGS['mapc_uid'];
+        $mapc_lang = $ARGS['mapc_lang'] ? $_REQUEST['mapc_lang'] : $CONFIG['lang'];
 
 	} // BLOCK
 

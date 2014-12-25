@@ -20,10 +20,10 @@ require(INIT_PATH.'init.db.php');
 
     { // BLOCK:arg_check:20140405:넘김값 정리
 
-        $scrap_type        = $_REQUEST['scrap_type'];
-        $scrap_option_db   = $_REQUEST['scrap_option_db'];
-        $scrap_option_rdf  = $_REQUEST['scrap_option_rdf'];
-        $scrap_option_thum = $_REQUEST['scrap_option_thum'];
+        $scrap_type        = $ARGS['scrap_type'];
+        $scrap_option_db   = $ARGS['scrap_option_db'];
+        $scrap_option_rdf  = $ARGS['scrap_option_rdf'];
+        $scrap_option_thum = $ARGS['scrap_option_thum'];
 
     } // BLOCK
 
@@ -434,7 +434,7 @@ require(INIT_PATH.'init.db.php');
 
             break;
     
-    } // switch($_REQUEST['scrap_type'])
+    } // switch($ARGS['scrap_type'])
 
 } // Model : Tail
 

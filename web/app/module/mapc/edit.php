@@ -17,7 +17,7 @@ require(INIT_PATH.'init.db.php');
 
 	{ // BLOCK:post_get:20131023:글 정보 가져오기
 
-        $mapc_cate_edit = $_REQUEST['mapc_cate_edit'];
+        $mapc_cate_edit = $ARGS['mapc_cate_edit'];
 
         // dc_identifier값이 없을 경우 새 글
         if(empty($_REQUEST['mapc_uid'])) {

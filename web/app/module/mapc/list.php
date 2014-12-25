@@ -18,16 +18,16 @@ require(INIT_PATH.'init.db.php');
     { // BLOCK:search_query:20140101:입력값 체크
 
         // 출력 키워드(리스트, 앨범, 달력, 꼬리표(태그)리스트...)
-        $mapc_cate   = $_REQUEST['mapc_cate'];
+        $mapc_cate   = $ARGS['mapc_cate'];
 
         // 검색 옵션
-        $mapc_srch_title = $_REQUEST['mapc_srch_title'];
-        $mapc_search_key = $_REQUEST['mapc_search_key'];
-        $mapc_search     = $_REQUEST['mapc_search'];
-        $mapc_srch_lang  = $_REQUEST['mapc_srch_lang']; // 기본 언어의 글들만 불러오게끔~
+        $mapc_srch_title = $ARGS['mapc_srch_title'];
+        $mapc_search_key = $ARGS['mapc_search_key'];
+        $mapc_search     = $ARGS['mapc_search'];
+        $mapc_srch_lang  = $ARGS['mapc_srch_lang']; // 기본 언어의 글들만 불러오게끔~
 
-        $mapc_date_from  = $_REQUEST['mapc_date_from'];
-        $mapc_date_to    = $_REQUEST['mapc_date_to'];
+        $mapc_date_from  = $ARGS['mapc_date_from'];
+        $mapc_date_to    = $ARGS['mapc_date_to'];
 
         // mapc_cate값에 따라서 가져올 자료 결정하기... 예를들어 앨범은 이미지화일만, 달력은 일정관련 게시물만
         switch($mapc_cate) {
@@ -99,7 +99,7 @@ require(INIT_PATH.'init.db.php');
             $query = "SELECT SQL_CALC_FOUND_ROWS post_uid, post_lang, post_title, post_content, post_origin_type, post_origin_url, post_write_date FROM " . $CONFIG_DB['prefix'] . "mapc_post " . $search_query . " ORDER BY post_write_date DESC LIMIT :page, :pageSet ";
 
             $sth       = $CONFIG_DB['handler']->prepare($query);
-            $mapc_page = $_REQUEST['mapc_page'] ? (int)$_REQUEST['mapc_page'] : 1;
+            $mapc_page = $ARGS['mapc_page'] ? (int)$ARGS['mapc_page'] : 1;
             $page      = ($mapc_page - 1) * $pageSet;
 
             $sth->bindParam(':page',      $page,    PDO::PARAM_INT);

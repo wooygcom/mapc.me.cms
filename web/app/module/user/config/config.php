@@ -9,14 +9,14 @@ $MODULE['user']['installed'] = TRUE;
 $PATH['user']['root']	= MODULE_PATH . 'user/';
 $PATH['user']['view']	= MODULE_PATH . 'user/view/';
 
-$URL['user']['root']  = $URL['core']['root'] . '?core_modl=user';
+$URL['user']['root']  = $URL['core']['root'] . 'user/';
 
-$URL['user']['sign_in']     = $URL['user']['root'] . '&core_page=sign_in';
-$URL['user']['sign_in_act'] = $URL['user']['root'] . '&core_page=sign_in_act';
-$URL['user']['sign_out']     = $URL['user']['root'] . '&core_page=sign_out';
-$URL['user']['sign_out_act'] = $URL['user']['root'] . '&core_page=sign_out_act';
-$URL['user']['sign_up']      = $URL['user']['root'] . '&core_page=sign_up';
-$URL['user']['sign_up_act']  = $URL['user']['root'] . '&core_page=sign_up_act';
+$URL['user']['sign_in']     = $URL['user']['root'] . 'sign_in/';
+$URL['user']['sign_in_act'] = $URL['user']['root'] . 'sign_in_act/';
+$URL['user']['sign_out']     = $URL['user']['root'] . 'sign_out/';
+$URL['user']['sign_out_act'] = $URL['user']['root'] . 'sign_out_act/';
+$URL['user']['sign_up']      = $URL['user']['root'] . 'sign_up/';
+$URL['user']['sign_up_act']  = $URL['user']['root'] . 'sign_up_act/';
 
 
 /**

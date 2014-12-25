@@ -9,7 +9,7 @@ if(is_array($post_list)) {
 
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-	  <a href="<?= $URL['mapc']['view']; ?>&mapc_uid=<?= $var['post_uid']; ?>&mapc_lang=<?= $var['post_lang']; ?>" class="thumbnail">
+	  <a href="<?= $URL['mapc']['view']; ?>mapc_uid/<?= $var['post_uid']; ?>/mapc_lang/<?= $var['post_lang']; ?>" class="thumbnail">
         <img src="<?= $file_url; ?>" alt="<?= $var['post_title']; ?>">
 	  </a>
     </div>
